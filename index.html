@@ -4,18 +4,16 @@
     <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
 <script>
   // Our code
-  var nums = [80, 53, 125, 200, 28, 97];
-  document.write(nums[0]);
-  var svg = d3.select('body').append('svg')
-+   .attr('width', 200)
-+   .attr('height', 200);
+  var numbers = [ 5, 4, 10, 1 ],
+      data = [
+        { date: '2014-01-01', amount: 10 },
+        { date: '2014-02-01', amount: 20 },
+        { date: '2014-03-01', amount: 40 },
+        { date: '2014-04-01', amount: 80 }
+      ];
 
-svg.append('rect');
-svg.append('rect');
-svg.append('rect');
-svg.append('rect');
-svg.append('rect');
-svg.append('rect');
+  d3.min(numbers);
+  // 1
 </script>
   </body>
 </html>
