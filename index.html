@@ -13,7 +13,7 @@
       ];
 
   //printing to the screen
-  document.write(4);
+  //document.write(4);
   //printing to the console
   console.log(4);
 
@@ -23,6 +23,9 @@
 
   document.write(x);
 
+  //getting the maximum and putting it through a callback function
+  var y = 0;
+  d3.max(data, function(d, i) { return d.amount });
 
 </script>
   </body>
