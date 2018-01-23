@@ -35,6 +35,12 @@
 
   document.write(z[0]);
 
+  //D3 scales
+  //var i = [];
+  y.domain(d3.extent(data, function(d) { return d.amount }));
+  y(0);
+  y(80);
+
 </script>
   </body>
 </html>
