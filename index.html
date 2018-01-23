@@ -25,7 +25,9 @@
 
   //getting the maximum and putting it through a callback function
   var y = 0;
-  d3.max(data, function(d, i) { return d.amount });
+  y = d3.max(data, function(d, i) { return d.amount });
+
+  document.write(y);
 
 </script>
   </body>
