@@ -1,0 +1,46 @@
+<html>
+  <head>Javascript-D3</head>
+  <body>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script>
+  // Our code
+  var numbers = [ 5, 4, 10, 1 ],
+      data = [
+        { date: '2014-01-01', amount: 10 },
+        { date: '2014-02-01', amount: 20 },
+        { date: '2014-03-01', amount: 40 },
+        { date: '2014-04-01', amount: 80 }
+      ];
+
+  //printing to the screen
+  //document.write(4);
+  //printing to the console
+  console.log(4);
+
+  //getting minimum and printing to the screen
+  var x = 0;
+  x = d3.min(numbers);
+
+  document.write(x);
+
+  //getting the maximum and putting it through a callback function
+  var y = 0;
+  y = d3.max(data, function(d, i) { return d.amount });
+
+  document.write(y);
+
+  //getting the extent of data
+  var z = [];
+  z = d3.extent(numbers);
+
+  document.write(z[0]);
+
+  //D3 scales
+  //var i = [];
+  y.domain(d3.extent(data, function(d) { return d.amount }));
+  y(0);
+  y(80);
+
+</script>
+  </body>
+</html>
