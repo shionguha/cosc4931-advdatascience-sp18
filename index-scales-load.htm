@@ -1,7 +1,7 @@
 
 <!-- saved from url=(0066)https://mimno.github.io/info3300-spr2017/Prompts/020817/index.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC/MATH/MSCS 4931/5931 - Advanced Data Science</title>
 <link href="./index-scales-load_files/css" rel="stylesheet">
 <link rel="stylesheet" href="./index-scales-load_files/default.min.css">
 <script src="./index-scales-load_files/d3.v4.min.js"></script><style></style>
@@ -25,11 +25,10 @@ svg { border: solid #ccc 1px; }
 }
 </style></head>
 <body>
-<h3>Prompt for Wednesday, February 8</h3>
+<h3>Prompt for Wednesday, January 29</h3>
 
 <div>
 <ul>
-	<li>Advanced HTML/CSS Workshop: Thursday, 6pm, Gates 114.</li>
 	<li><a href="http://www.informationisbeautiful.net/visualizations/top-500-passwords-visualized/">Passwords you shouldn't use</a></li>
 </ul>
 </div>
@@ -62,14 +61,14 @@ function parseLine (line) {
 
 d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 	rawData = data;
-	
+
 	nestedData = d3.nest()
 	.key(function (d) { return d.Country; })
 	.entries(data);
-	
+
 	countryData = nestedData.map(function (country) {
 		var result = { Country: country.key };
-		
+
 		country.values.forEach(function (d) {
 			if (d.Variable == "Population, total") {
 				result.Population = d.value;
@@ -81,12 +80,12 @@ d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 				result.Area = d.value;
 			}
 		});
-		
+
 		return result;
 	});
-	
+
 	//countryData = countryData.filter(function (d) { return d.Population && d.GDP; });
-	
+
 	countryData.forEach(function (country) {
 		svg.append("circle")
 		.attr("cx", 0)
@@ -121,14 +120,14 @@ svg.append(<span class="hljs-string">"text"</span>)
 
 d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(error, data)</span> </span>{
 	rawData = data;
-	
+
 	nestedData = d3.nest()
 	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> </span>{ <span class="hljs-keyword">return</span> d.Country; })
 	.entries(data);
-	
+
 	countryData = nestedData.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(country)</span> </span>{
 		<span class="hljs-keyword">var</span> result = { Country: country.key };
-		
+
 		country.values.<span class="hljs-keyword">forEach</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> </span>{
 			<span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Population, total"</span>) {
 				result.Population = d.value;
@@ -140,12 +139,12 @@ d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span c
 				result.Area = d.value;
 			}
 		});
-		
+
 		<span class="hljs-keyword">return</span> result;
 	});
-	
+
 	<span class="hljs-comment">//countryData = countryData.filter(function (d) { return d.Population &amp;&amp; d.GDP; });</span>
-	
+
 	countryData.<span class="hljs-keyword">forEach</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(country)</span> </span>{
 		svg.append(<span class="hljs-string">"circle"</span>)
 		.attr(<span class="hljs-string">"cx"</span>, <span class="hljs-number">0</span>)

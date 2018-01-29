@@ -1,7 +1,7 @@
 
 <!-- saved from url=(0064)https://mimno.github.io/info3300-spr2017/Notes/020817/index.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC/MATH/MSCS 4931/5931 - Advanced Data Science</title>
 <link href="./index-scales-load-fin_files/css" rel="stylesheet">
 <link rel="stylesheet" href="./index-scales-load-fin_files/default.min.css">
 <script src="./index-scales-load-fin_files/d3.v4.min.js"></script><style></style>
@@ -25,18 +25,17 @@ svg { border: solid #ccc 1px; }
 }
 </style></head>
 <body>
-<h3>Notes for Wednesday, February 8</h3>
+<h3>Notes for Wednesday, January 29</h3>
 
 <div>
 <ul>
-	<li>Advanced HTML/CSS Workshop: Thursday, 6pm, Gates 114.</li>
 	<li><a href="http://www.informationisbeautiful.net/visualizations/top-500-passwords-visualized/">Passwords you shouldn't use</a></li>
 </ul>
 </div>
 
 <div>
 	<p>On Monday we worked with a nice clean dataset. It was constructed (by me) for visualization, it had one object per drive with all the interesting variables, it was complete and accurate, and the values of the data variables (drive number, yards) were nicely spaced. Today's project shows what happens when none of that is true.</p>
-	
+
 	<p>We're working with <a href="http://data.worldbank.org/data-catalog/country-profiles">Country Profile data</a> from the world bank. Here are some of the issues we face:</p>
 	<ul>
 		<li>Ungrouped data. Each row in the spreadsheet represents one variable for one geographic area (countries <i>and</i> regions). We want to plot different variables against each other, so we need to group them and select variables we want. </li>
@@ -70,7 +69,7 @@ var rawData, nestedData;
 
 // This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.
 function parseLine (line) {
-	return { 
+	return {
 		Country: line["Country Name"],
 		Variable: line["Series Name"],
 		value: Number(line["2015 [YR2015]"])
@@ -81,16 +80,16 @@ function parseLine (line) {
 
 d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 	rawData = data;
-	
+
 	console.log("done loading");
-	
+
 	nestedData = d3.nest()
 	.key(function (d) { return d.Country; })
 	.entries(data);
-	
+
 	countryData = nestedData.map(function (country) {
 		var result = { Country: country.key };
-		
+
 		country.values.forEach(function (d) {
 			if (d.Variable == "Population, total") {
 				result.Population = d.value;
@@ -102,15 +101,15 @@ d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 				result.Area = d.value;
 			}
 		});
-		
+
 		// Fix this here, rather than in the data file.
 		if (result.Country == "Qatar") {
 			result.GDP /= 1000000;
 		}
-		
+
 		return result;
 	});
-	
+
 	var popExtent = d3.extent(countryData,
 		function (d) { return d.Population; });
 	console.log(popExtent);
@@ -124,9 +123,9 @@ d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 	var gdpScale = d3.scaleLog()
 	.domain(gdpExtent)
 	.range([400, 0]);
-	
+
 	countryData = countryData.filter(function (d) { return d.Population && d.GDP; });
-	
+
 	countryData.forEach(function (country) {
 		svg.append("circle")
 		.attr("cx", popScale(country.Population))
@@ -159,7 +158,7 @@ svg.append(<span class="hljs-string">"text"</span>)
 
 <span class="hljs-comment">// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseLine</span> (<span class="hljs-params">line</span>) </span>{
-	<span class="hljs-keyword">return</span> { 
+	<span class="hljs-keyword">return</span> {
 		<span class="hljs-attr">Country</span>: line[<span class="hljs-string">"Country Name"</span>],
 		<span class="hljs-attr">Variable</span>: line[<span class="hljs-string">"Series Name"</span>],
 		<span class="hljs-attr">value</span>: <span class="hljs-built_in">Number</span>(line[<span class="hljs-string">"2015 [YR2015]"</span>])
@@ -170,16 +169,16 @@ svg.append(<span class="hljs-string">"text"</span>)
 
 d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, data</span>) </span>{
 	rawData = data;
-	
+
 	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"done loading"</span>);
-	
+
 	nestedData = d3.nest()
 	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Country; })
 	.entries(data);
-	
+
 	countryData = nestedData.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
 		<span class="hljs-keyword">var</span> result = { <span class="hljs-attr">Country</span>: country.key };
-		
+
 		country.values.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 			<span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Population, total"</span>) {
 				result.Population = d.value;
@@ -191,15 +190,15 @@ d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span c
 				result.Area = d.value;
 			}
 		});
-		
+
 		<span class="hljs-comment">// Fix this here, rather than in the data file.</span>
 		<span class="hljs-keyword">if</span> (result.Country == <span class="hljs-string">"Qatar"</span>) {
 			result.GDP /= <span class="hljs-number">1000000</span>;
 		}
-		
+
 		<span class="hljs-keyword">return</span> result;
 	});
-	
+
 	<span class="hljs-keyword">var</span> popExtent = d3.extent(countryData,
 		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population; });
 	<span class="hljs-built_in">console</span>.log(popExtent);
@@ -213,9 +212,9 @@ d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span c
 	<span class="hljs-keyword">var</span> gdpScale = d3.scaleLog()
 	.domain(gdpExtent)
 	.range([<span class="hljs-number">400</span>, <span class="hljs-number">0</span>]);
-	
+
 	countryData = countryData.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population &amp;&amp; d.GDP; });
-	
+
 	countryData.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
 		svg.append(<span class="hljs-string">"circle"</span>)
 		.attr(<span class="hljs-string">"cx"</span>, popScale(country.Population))
