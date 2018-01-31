@@ -29,19 +29,19 @@ svg { border: solid #ccc 1px; }
 
 <div>
 <ul>
-	<li><a href="http://www.informationisbeautiful.net/visualizations/top-500-passwords-visualized/">Passwords you shouldn't use</a></li>
+	<li><a href="https://www.informationisbeautiful.net/visualizations/top-500-passwords-visualized/">Passwords you shouldn't use</a></li>
 </ul>
 </div>
 
 <div>
 	<p>On Monday we worked with a nice clean dataset. It was constructed (by me) for visualization, it had one object per drive with all the interesting variables, it was complete and accurate, and the values of the data variables (drive number, yards) were nicely spaced. Today's project shows what happens when none of that is true.</p>
 
-	<p>We're working with <a href="http://data.worldbank.org/data-catalog/country-profiles">Country Profile data</a> from the world bank. Here are some of the issues we face:</p>
+	<p>We're working with <a href="https://data.worldbank.org/data-catalog/country-profiles">Country Profile data</a> from the world bank. Here are some of the issues we face:</p>
 	<ul>
 		<li>Ungrouped data. Each row in the spreadsheet represents one variable for one geographic area (countries <i>and</i> regions). We want to plot different variables against each other, so we need to group them and select variables we want. </li>
 		<li>Wordy variables. The data is intended to be used in spreadsheet form for people to use directly. We want to use it in a program. There are variable names like "Mortality rate, under-5 (per 1,000 live births)" that will not make good key-value pairs in an object.</li>
 		<li>Missing data. Missing values are shown with <tt>..</tt>. When we parse strings to numbers, these are silently converted to the special value <tt>NaN</tt>, for "not a number". Calling our scale functions on <tt>NaN</tt> doesn't cause an error either, it just returns  <tt>NaN</tt>. We only get errors when we try to set SVG attributes.</li>
-		<li>Incorrect data. Qatar jumps out as a massive outlier in GDP. That initially didn't strike me as odd because Qatar is often an outlier, but no -- that can't possibly be right. This data is saying that Qatar has vastly more economic activity than the entire world! Looking at the data, the value for 2015 is 164641483.52 billion dollars. The value for the Russian Federation is 1331.21. No way is this correct. According to the <a href="http://data.worldbank.org/country/qatar">World Bank website</a>, the GDP for Qatar is 164.61 billion dollars. The listed number is therefore off by a factor of one million.</li>
+		<li>Incorrect data. Qatar jumps out as a massive outlier in GDP. That initially didn't strike me as odd because Qatar is often an outlier, but no -- that can't possibly be right. This data is saying that Qatar has vastly more economic activity than the entire world! Looking at the data, the value for 2015 is 164641483.52 billion dollars. The value for the Russian Federation is 1331.21. No way is this correct. According to the <a href="https://data.worldbank.org/country/qatar">World Bank website</a>, the GDP for Qatar is 164.61 billion dollars. The listed number is therefore off by a factor of one million.</li>
 		<li>Data dispersion. If we plot Population vs. GDP on a linear scale, there's a huge outlier (World). Everything else is stuffed in the bottom left corner. Our first and most powerful trick is to switch to a logarithmic scale.
 		</li>
 		<li>Data dispersion, part II. Even when we use a log scale, we still see a big diagonal slice of points with nothing on either side. We can make the points smaller and semi-transparent, but there is still a lot of <i>overplotting</i>.
