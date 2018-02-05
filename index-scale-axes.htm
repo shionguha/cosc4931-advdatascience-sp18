@@ -1,0 +1,243 @@
+
+<!-- saved from url=(0066)https://mimno.github.io/info3300-spr2017/Prompts/021017/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>INFO 3300 - Data-driven Web Applications</title>
+<link href="./index-scale-axes_files/css" rel="stylesheet">
+<link rel="stylesheet" href="./index-scale-axes_files/default.min.css">
+<script src="./index-scale-axes_files/d3.v4.min.js"></script><style></style>
+<script src="./index-scale-axes_files/highlight.min.js"></script>
+<style>
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+svg { border: solid #ccc 1px; }
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+<h3>Prompt for Friday, February 10</h3>
+
+<div>
+<ul>
+	<li><a href="http://www.loc.gov/pictures/resource/ppmsca.33873/?co=anedub">Another approach to massive scale differences by W.E.B. Du Bois</a></li>
+	<li><a href="http://bl.ocks.org/emeeks/3993c03914e81f1d57650292b3001b27">An attempt to recreate Du Bois' plot in d3</a></li>
+</ul>
+</div>
+
+<div>
+	<p>More on scales and guides.</p>
+	
+	<p>We're working with <a href="http://data.worldbank.org/data-catalog/country-profiles">Country Profile data</a> from the world bank. Here are some of the issues we face:</p>
+	<ul>
+		<li>Ungrouped data. </li>
+		<li>Wordy variables. </li>
+		<li>Missing data. </li>
+		<li>Incorrect data. </li>
+		<li>Data dispersion.</li>
+	</ul>
+</div>
+
+<!-- Here's an SVG element. Note that in this file it looks like the <div> above. -->
+<svg height="400" width="400">
+  <!-- Visual elements are represented by tags, which have attributes -->
+<text id="CountryName" x="30" y="50" style="font-size: 36pt;"></text><circle cx="273.4834192250437" cy="284.62922138872955" r="3" style="opacity: 0.3;"></circle><circle cx="191.61740459333302" cy="294.0477308855373" r="3" style="opacity: 0.3;"></circle><circle cx="280.1936656621648" cy="246.18469315881032" r="3" style="opacity: 0.3;"></circle><circle cx="264.60708047338306" cy="254.8515704577601" r="3" style="opacity: 0.3;"></circle><circle cx="74.30193559216407" cy="333.33280129323765" r="3" style="opacity: 0.3;"></circle><circle cx="283.2481177171793" cy="223.86323647961345" r="3" style="opacity: 0.3;"></circle><circle cx="193.10533152834626" cy="295.4636873664868" r="3" style="opacity: 0.3;"></circle><circle cx="262.88817880540563" cy="209.03562326909525" r="3" style="opacity: 0.3;"></circle><circle cx="228.53353624985863" cy="231.64651168250933" r="3" style="opacity: 0.3;"></circle><circle cx="232.3897269462666" cy="266.62184010620604" r="3" style="opacity: 0.3;"></circle><circle cx="123.88798317496428" cy="298.56387673566076" r="3" style="opacity: 0.3;"></circle><circle cx="166.6213320827889" cy="276.12985248128393" r="3" style="opacity: 0.3;"></circle><circle cx="327.5638029079469" cy="243.39550942588713" r="3" style="opacity: 0.3;"></circle><circle cx="112.68272139715398" cy="311.068884733318" r="3" style="opacity: 0.3;"></circle><circle cx="231.89553469100815" cy="266.1048979941603" r="3" style="opacity: 0.3;"></circle><circle cx="237.69751023643818" cy="228.28641173473983" r="3" style="opacity: 0.3;"></circle><circle cx="121.18123750521043" cy="327.4734161293711" r="3" style="opacity: 0.3;"></circle><circle cx="236.44660803580564" cy="299.72980842073645" r="3" style="opacity: 0.3;"></circle><circle cx="146.89128913292592" cy="324.5644467611115" r="3" style="opacity: 0.3;"></circle><circle cx="235.94561712156127" cy="275.08934598885" r="3" style="opacity: 0.3;"></circle><circle cx="200.9632974992202" cy="287.79101217125526" r="3" style="opacity: 0.3;"></circle><circle cx="183.30226529655766" cy="289.8932344901994" r="3" style="opacity: 0.3;"></circle><circle cx="336.20089376923653" cy="204.01257730121756" r="3" style="opacity: 0.3;"></circle><circle cx="126.39403823671283" cy="291.8014499084105" r="3" style="opacity: 0.3;"></circle><circle cx="222.39165872413946" cy="267.6067725139949" r="3" style="opacity: 0.3;"></circle><circle cx="253.67728272972107" cy="295.2113978971581" r="3" style="opacity: 0.3;"></circle><circle cx="237.36641818330654" cy="317.2747104268048" r="3" style="opacity: 0.3;"></circle><circle cx="248.5887381299213" cy="285.8512511953596" r="3" style="opacity: 0.3;"></circle><circle cx="262.2566172394289" cy="277.75438680258276" r="3" style="opacity: 0.3;"></circle><circle cx="276.769712119435" cy="206.42121687501503" r="3" style="opacity: 0.3;"></circle><circle cx="133.61631729192865" cy="329.07178950102593" r="3" style="opacity: 0.3;"></circle><circle cx="209.47167401504302" cy="329.2961518065576" r="3" style="opacity: 0.3;"></circle><circle cx="245.06922068017474" cy="294.8640823984551" r="3" style="opacity: 0.3;"></circle><circle cx="253.37719185792093" cy="239.63989546553432" r="3" style="opacity: 0.3;"></circle><circle cx="400" cy="171.46165776353556" r="3" style="opacity: 0.3;"></circle><circle cx="286.8008910246809" cy="236.1963493637707" r="3" style="opacity: 0.3;"></circle><circle cx="147.7584204437219" cy="347.4813136121483" r="3" style="opacity: 0.3;"></circle><circle cx="302.7393283422257" cy="273.91794294134377" r="3" style="opacity: 0.3;"></circle><circle cx="207.4819078855311" cy="299.178991763893" r="3" style="opacity: 0.3;"></circle><circle cx="208.84478394350984" cy="266.2590725082801" r="3" style="opacity: 0.3;"></circle><circle cx="261.3163997832314" cy="275.77248521115456" r="3" style="opacity: 0.3;"></circle><circle cx="204.41952094051396" cy="268.1368783475285" r="3" style="opacity: 0.3;"></circle><circle cx="161.03895097104632" cy="284.41824383690437" r="3" style="opacity: 0.3;"></circle><circle cx="235.40505407429544" cy="244.32638947525274" r="3" style="opacity: 0.3;"></circle><circle cx="214.46687882164323" cy="236.0134771451824" r="3" style="opacity: 0.3;"></circle><circle cx="151.7889313093407" cy="327.6784364108422" r="3" style="opacity: 0.3;"></circle><circle cx="65.80341948410761" cy="349.11884521710857" r="3" style="opacity: 0.3;"></circle><circle cx="235.34088656321038" cy="262.16729370528003" r="3" style="opacity: 0.3;"></circle><circle cx="249.78287923964655" cy="255.2825326172657" r="3" style="opacity: 0.3;"></circle><circle cx="308.4590956055843" cy="233.97702074135762" r="3" style="opacity: 0.3;"></circle><circle cx="217.04515004792876" cy="279.44498170646614" r="3" style="opacity: 0.3;"></circle><circle cx="150.23388638697114" cy="292.8380085267695" r="3" style="opacity: 0.3;"></circle><circle cx="164.86098018561947" cy="281.95235105458903" r="3" style="opacity: 0.3;"></circle><circle cx="311.2524292293382" cy="263.9739568931295" r="3" style="opacity: 0.3;"></circle><circle cx="151.7889313093407" cy="310.90710069347136" r="3" style="opacity: 0.3;"></circle><circle cx="213.2546964158444" cy="240.3077836577995" r="3" style="opacity: 0.3;"></circle><circle cx="297.8206502783681" cy="198.48956563564525" r="3" style="opacity: 0.3;"></circle><circle cx="174.26509064731945" cy="290.0551032348942" r="3" style="opacity: 0.3;"></circle><circle cx="178.99981559153446" cy="338.55868609699775" r="3" style="opacity: 0.3;"></circle><circle cx="199.78931715627644" cy="290.42157767462066" r="3" style="opacity: 0.3;"></circle><circle cx="304.50427829433966" cy="192.6092210857567" r="3" style="opacity: 0.3;"></circle><circle cx="267.69221995828195" cy="272.79022181877644" r="3" style="opacity: 0.3;"></circle><circle cx="236.25960515448713" cy="243.41655120846502" r="3" style="opacity: 0.3;"></circle><circle cx="81.08786964881828" cy="337.8153882094602" r="3" style="opacity: 0.3;"></circle><circle cx="250.19934100815343" cy="263.33346234967973" r="3" style="opacity: 0.3;"></circle><circle cx="241.4366687432234" cy="303.52797080365366" r="3" style="opacity: 0.3;"></circle><circle cx="176.34966619975324" cy="336.41572389619716" r="3" style="opacity: 0.3;"></circle><circle cx="146.89128913292592" cy="316.8764292002439" r="3" style="opacity: 0.3;"></circle><circle cx="235.91405737293817" cy="298.72584441485134" r="3" style="opacity: 0.3;"></circle><circle cx="226.38510601998635" cy="283.6507693422822" r="3" style="opacity: 0.3;"></circle><circle cx="222.99845414456757" cy="235.17863760894332" r="3" style="opacity: 0.3;"></circle><circle cx="233.0490696353206" cy="251.80877612816502" r="3" style="opacity: 0.3;"></circle><circle cx="118.23883744490031" cy="287.3449387295417" r="3" style="opacity: 0.3;"></circle><circle cx="398.4825791118028" cy="201.04989119842475" r="3" style="opacity: 0.3;"></circle><circle cx="343.45232030616313" cy="216.89457276287575" r="3" style="opacity: 0.3;"></circle><circle cx="277.30314708737683" cy="244.8235776037734" r="3" style="opacity: 0.3;"></circle><circle cx="207.62798270530624" cy="236.71557891629976" r="3" style="opacity: 0.3;"></circle><circle cx="227.61791331227252" cy="235.75365407884956" r="3" style="opacity: 0.3;"></circle><circle cx="294.6330280331729" cy="203.54851129654855" r="3" style="opacity: 0.3;"></circle><circle cx="189.69140265907188" cy="290.0551032348942" r="3" style="opacity: 0.3;"></circle><circle cx="319.53134732601893" cy="187.88637537556673" r="3" style="opacity: 0.3;"></circle><circle cx="224.26955077508399" cy="272.7997270511392" r="3" style="opacity: 0.3;"></circle><circle cx="252.59582883685127" cy="244.40071867193836" r="3" style="opacity: 0.3;"></circle><circle cx="285.2367712315531" cy="263.4428464736329" r="3" style="opacity: 0.3;"></circle><circle cx="81.08786964881828" cy="370.14200533362947" r="3" style="opacity: 0.3;"></circle><circle cx="288.4364324554354" cy="208.52708110093607" r="3" style="opacity: 0.3;"></circle><circle cx="175.60642159551506" cy="304.34505571301105" r="3" style="opacity: 0.3;"></circle><circle cx="201.6659984868237" cy="252.97125770570008" r="3" style="opacity: 0.3;"></circle><circle cx="216.0940922289994" cy="303.87745505936954" r="3" style="opacity: 0.3;"></circle><circle cx="220.5528392565407" cy="292.5911819116877" r="3" style="opacity: 0.3;"></circle><circle cx="178.82945619750555" cy="278.66862251547457" r="3" style="opacity: 0.3;"></circle><circle cx="215.46413506135096" cy="268.7512870189855" r="3" style="opacity: 0.3;"></circle><circle cx="181.45728405269034" cy="322.75457982413343" r="3" style="opacity: 0.3;"></circle><circle cx="206.59195472929653" cy="324.6512428842447" r="3" style="opacity: 0.3;"></circle><circle cx="191.85062116042323" cy="271.1438565576731" r="3" style="opacity: 0.3;"></circle><circle cx="136.72090599981115" cy="265.0953708174635" r="3" style="opacity: 0.3;"></circle><circle cx="137.88709977885878" cy="269.095559154199" r="3" style="opacity: 0.3;"></circle><circle cx="180.49561920497501" cy="296.22501437465803" r="3" style="opacity: 0.3;"></circle><circle cx="263.5360738160684" cy="296.85471152219384" r="3" style="opacity: 0.3;"></circle><circle cx="251.97318720638182" cy="304.34505571301105" r="3" style="opacity: 0.3;"></circle><circle cx="271.1154208829406" cy="235.94169283182123" r="3" style="opacity: 0.3;"></circle><circle cx="125.57914896966899" cy="315.4184702012337" r="3" style="opacity: 0.3;"></circle><circle cx="252.71130852173886" cy="292.0514993508077" r="3" style="opacity: 0.3;"></circle><circle cx="127.18975184790109" cy="296.83640821827197" r="3" style="opacity: 0.3;"></circle><circle cx="54.425184090304626" cy="368.0411601963334" r="3" style="opacity: 0.3;"></circle><circle cx="163.54500603279484" cy="293.6149333026582" r="3" style="opacity: 0.3;"></circle><circle cx="319.5473247740814" cy="211.8480988076985" r="3" style="opacity: 0.3;"></circle><circle cx="77.86483504682784" cy="358.34492625940834" r="3" style="opacity: 0.3;"></circle><circle cx="198.5731100423783" cy="303.87745505936954" r="3" style="opacity: 0.3;"></circle><circle cx="192.42672143419713" cy="293.5235416350425" r="3" style="opacity: 0.3;"></circle><circle cx="139.56428324208656" cy="312.77295470905256" r="3" style="opacity: 0.3;"></circle><circle cx="275.3538734257418" cy="255.20968305717585" r="3" style="opacity: 0.3;"></circle><circle cx="268.3882283828182" cy="289.3800923470401" r="3" style="opacity: 0.3;"></circle><circle cx="290.5595436638613" cy="263.6693456201839" r="3" style="opacity: 0.3;"></circle><circle cx="186.1697677222742" cy="293.90746881459177" r="3" style="opacity: 0.3;"></circle><circle cx="269.02278841305025" cy="282.99055663004265" r="3" style="opacity: 0.3;"></circle><circle cx="251.41880973826733" cy="219.36899688227186" r="3" style="opacity: 0.3;"></circle><circle cx="207.33519933353472" cy="245.46084571497124" r="3" style="opacity: 0.3;"></circle><circle cx="216.76819298634507" cy="292.1356342620277" r="3" style="opacity: 0.3;"></circle><circle cx="256.86465063836226" cy="302.39347143089685" r="3" style="opacity: 0.3;"></circle><circle cx="331.7468962444091" cy="227.2961684939337" r="3" style="opacity: 0.3;"></circle><circle cx="211.48115233875643" cy="231.19656142618953" r="3" style="opacity: 0.3;"></circle><circle cx="206.5167238457764" cy="261.7198365734325" r="3" style="opacity: 0.3;"></circle><circle cx="332.97167617147073" cy="237.52917677796862" r="3" style="opacity: 0.3;"></circle><circle cx="23.439650956523188" cy="359.5344715027817" r="3" style="opacity: 0.3;"></circle><circle cx="202.01194798170152" cy="266.93387777818515" r="3" style="opacity: 0.3;"></circle><circle cx="219.74765197441351" cy="278.60926616084186" r="3" style="opacity: 0.3;"></circle><circle cx="272.2663043307784" cy="243.949885560769" r="3" style="opacity: 0.3;"></circle><circle cx="311.69522941224795" cy="236.1737687226372" r="3" style="opacity: 0.3;"></circle><circle cx="278.7392592539079" cy="227.445095972004" r="3" style="opacity: 0.3;"></circle><circle cx="234.75783301265233" cy="243.0478211501904" r="3" style="opacity: 0.3;"></circle><circle cx="183.00167426672354" cy="0" r="3" style="opacity: 0.3;"></circle><circle cx="256.7454892377545" cy="245.0348170113793" r="3" style="opacity: 0.3;"></circle><circle cx="323.8136848812656" cy="209.14156024430628" r="3" style="opacity: 0.3;"></circle><circle cx="238.6426552361472" cy="300.143365438419" r="3" style="opacity: 0.3;"></circle><circle cx="99.56993820372911" cy="342.3500527337926" r="3" style="opacity: 0.3;"></circle><circle cx="99.56993820372911" cy="357.77863843962206" r="3" style="opacity: 0.3;"></circle><circle cx="272.4382882650963" cy="222.03818519059294" r="3" style="opacity: 0.3;"></circle><circle cx="247.59763360600724" cy="290.88724331879985" r="3" style="opacity: 0.3;"></circle><circle cx="222.01276099890146" cy="272.97169315336646" r="3" style="opacity: 0.3;"></circle><circle cx="74.30193559216407" cy="330.95105951431117" r="3" style="opacity: 0.3;"></circle><circle cx="218.76590373428778" cy="311.815640828051" r="3" style="opacity: 0.3;"></circle><circle cx="213.62293527994058" cy="236.1560903440785" r="3" style="opacity: 0.3;"></circle><circle cx="212.88240346445644" cy="257.7453417339641" r="3" style="opacity: 0.3;"></circle><circle cx="180.16888943430612" cy="270.4638001833737" r="3" style="opacity: 0.3;"></circle><circle cx="137.30902983573665" cy="335.2750981145293" r="3" style="opacity: 0.3;"></circle><circle cx="236.16571448372622" cy="305.7055181375746" r="3" style="opacity: 0.3;"></circle><circle cx="291.21812123569833" cy="234.8732525483496" r="3" style="opacity: 0.3;"></circle><circle cx="240.70474498758244" cy="298.2245025828905" r="3" style="opacity: 0.3;"></circle><circle cx="285.50739058933226" cy="211.00638033513877" r="3" style="opacity: 0.3;"></circle><circle cx="258.63571387998616" cy="258.78482260869043" r="3" style="opacity: 0.3;"></circle><circle cx="60.59061875260522" cy="339.73514988169404" r="3" style="opacity: 0.3;"></circle><circle cx="97.74158654868725" cy="331.07535665918056" r="3" style="opacity: 0.3;"></circle><circle cx="81.08786964881828" cy="342.82572273915923" r="3" style="opacity: 0.3;"></circle><circle cx="280.66769370419905" cy="255.8285004029629" r="3" style="opacity: 0.3;"></circle><circle cx="134.8925543447693" cy="308.2209647165229" r="3" style="opacity: 0.3;"></circle><circle cx="164.34071964398314" cy="312.2010798671041" r="3" style="opacity: 0.3;"></circle><circle cx="232.9113249715662" cy="226.7646973681288" r="3" style="opacity: 0.3;"></circle><circle cx="227.25276709646906" cy="221.36652035036656" r="3" style="opacity: 0.3;"></circle><circle cx="228.01905998778378" cy="300.70255129987663" r="3" style="opacity: 0.3;"></circle><circle cx="290.2886845213719" cy="269.3092663716102" r="3" style="opacity: 0.3;"></circle><circle cx="298.39777652804" cy="230.80456325052631" r="3" style="opacity: 0.3;"></circle><circle cx="163.2755522709139" cy="330.95105951431117" r="3" style="opacity: 0.3;"></circle><circle cx="222.95216218909056" cy="312.3314329547563" r="3" style="opacity: 0.3;"></circle><circle cx="81.08786964881828" cy="352.09851677570146" r="3" style="opacity: 0.3;"></circle><circle cx="166.12765516623608" cy="281.0995060835418" r="3" style="opacity: 0.3;"></circle><circle cx="237.15402279923507" cy="270.3598450685821" r="3" style="opacity: 0.3;"></circle><circle cx="303.3465368518418" cy="220.15637516580918" r="3" style="opacity: 0.3;"></circle><circle cx="212.5689974380775" cy="273.61183593365257" r="3" style="opacity: 0.3;"></circle><circle cx="0" cy="400" r="3" style="opacity: 0.3;"></circle><circle cx="279.6436557829308" cy="278.3218893854047" r="3" style="opacity: 0.3;"></circle><circle cx="284.6067512999087" cy="257.071426756069" r="3" style="opacity: 0.3;"></circle><circle cx="230.62750248309308" cy="231.96398591294636" r="3" style="opacity: 0.3;"></circle><circle cx="296.96462627674447" cy="195.5138197551792" r="3" style="opacity: 0.3;"></circle><circle cx="350.9424876499735" cy="162.653800721661" r="3" style="opacity: 0.3;"></circle><circle cx="197.41025845232284" cy="266.4911932349079" r="3" style="opacity: 0.3;"></circle><circle cx="272.1799832419272" cy="262.5297788988527" r="3" style="opacity: 0.3;"></circle><circle cx="110.17666633540544" cy="342.82572273915923" r="3" style="opacity: 0.3;"></circle><circle cx="308.529234716555" cy="243.53134480914017" r="3" style="opacity: 0.3;"></circle><circle cx="205.98536863207192" cy="292.149695412229" r="3" style="opacity: 0.3;"></circle><circle cx="266.9689831157444" cy="272.70017385442895" r="3" style="opacity: 0.3;"></circle><circle cx="249.9292249872893" cy="283.0242582330907" r="3" style="opacity: 0.3;"></circle><circle cx="248.6321201348385" cy="289.85608785801577" r="3" style="opacity: 0.3;"></circle></svg>
+
+<script id="notes">
+
+var svg = d3.select("svg");
+
+svg.append("text")
+.attr("id", "CountryName")
+.attr("x", 30)
+.attr("y", 50)
+.style("font-size", "36pt");
+
+// Define variables outside the scope of the callback function.
+var countryData;
+var rawData, nestedData;
+
+// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.
+function parseLine (line) {
+	return { 
+		Country: line["Country Name"],
+		Variable: line["Series Name"],
+		value: Number(line["2015 [YR2015]"])
+	};
+}
+
+// Some data from http://data.worldbank.org/data-catalog/country-profiles
+
+d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
+	rawData = data;
+	
+	console.log("Code in the call-back function is only executed when the data file loads.");
+	
+	nestedData = d3.nest()
+	.key(function (d) { return d.Country; })
+	.entries(data);
+	
+	countryData = nestedData.map(function (country) {
+		var result = { Country: country.key };
+		
+		country.values.forEach(function (d) {
+			if (d.Variable == "Population, total") {
+				result.Population = d.value;
+			}
+			else if (d.Variable == "GDP (current US$)") {
+				result.GDP = d.value;
+			}
+			else if (d.Variable == "Surface area (sq. km)") {
+				result.Area = d.value;
+			}
+		});
+		
+		// Fix this here, rather than in the data file.
+		if (result.Country == "Qatar") {
+			//result.GDP /= 1000000;
+		}
+		
+		return result;
+	});
+	
+	var popExtent = d3.extent(countryData,
+		function (d) { return d.Population; });
+	console.log(popExtent);
+	var popScale = d3.scaleLog()
+	.domain(popExtent)
+	.range([0, 400]);
+	
+	var gdpExtent = d3.extent(countryData,
+		function (d) { return d.GDP; });
+	console.log(gdpExtent);
+	var gdpScale = d3.scaleLog()
+	.domain(gdpExtent)
+	.range([400, 0]);
+	
+	countryData = countryData.filter(function (d) { return d.Population && d.GDP; });
+	
+	countryData.forEach(function (country) {
+		svg.append("circle")
+		.attr("cx", popScale(country.Population))
+		.attr("cy", gdpScale(country.GDP))
+		.attr("r", 3)
+		.style("opacity", 0.3)
+		.on("mouseover", function () {
+			svg.select("#CountryName").text(country.Country);
+		});
+	});
+});
+
+console.log("Code after the d3.tsv() call is executed immediately.");
+
+</script>
+
+<!-- This block will be automatically filled with syntax-highlighted code from the script below -->
+<pre><code id="display" class="hljs http">
+
+<span class="javascript"><span class="hljs-keyword">var</span> svg = d3.select(<span class="hljs-string">"svg"</span>);
+
+svg.append(<span class="hljs-string">"text"</span>)
+.attr(<span class="hljs-string">"id"</span>, <span class="hljs-string">"CountryName"</span>)
+.attr(<span class="hljs-string">"x"</span>, <span class="hljs-number">30</span>)
+.attr(<span class="hljs-string">"y"</span>, <span class="hljs-number">50</span>)
+.style(<span class="hljs-string">"font-size"</span>, <span class="hljs-string">"36pt"</span>);
+
+<span class="hljs-comment">// Define variables outside the scope of the callback function.</span>
+<span class="hljs-keyword">var</span> countryData;
+<span class="hljs-keyword">var</span> rawData, nestedData;
+
+<span class="hljs-comment">// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseLine</span> (<span class="hljs-params">line</span>) </span>{
+	<span class="hljs-keyword">return</span> { 
+		<span class="hljs-attr">Country</span>: line[<span class="hljs-string">"Country Name"</span>],
+		<span class="hljs-attr">Variable</span>: line[<span class="hljs-string">"Series Name"</span>],
+		<span class="hljs-attr">value</span>: <span class="hljs-built_in">Number</span>(line[<span class="hljs-string">"2015 [YR2015]"</span>])
+	};
+}
+
+<span class="hljs-comment">// Some data from http://data.worldbank.org/data-catalog/country-profiles</span>
+
+d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, data</span>) </span>{
+	rawData = data;
+	
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code in the call-back function is only executed when the data file loads."</span>);
+	
+	nestedData = d3.nest()
+	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Country; })
+	.entries(data);
+	
+	countryData = nestedData.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
+		<span class="hljs-keyword">var</span> result = { <span class="hljs-attr">Country</span>: country.key };
+		
+		country.values.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+			<span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Population, total"</span>) {
+				result.Population = d.value;
+			}
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"GDP (current US$)"</span>) {
+				result.GDP = d.value;
+			}
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Surface area (sq. km)"</span>) {
+				result.Area = d.value;
+			}
+		});
+		
+		<span class="hljs-comment">// Fix this here, rather than in the data file.</span>
+		<span class="hljs-keyword">if</span> (result.Country == <span class="hljs-string">"Qatar"</span>) {
+			<span class="hljs-comment">//result.GDP /= 1000000;</span>
+		}
+		
+		<span class="hljs-keyword">return</span> result;
+	});
+	
+	<span class="hljs-keyword">var</span> popExtent = d3.extent(countryData,
+		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population; });
+	<span class="hljs-built_in">console</span>.log(popExtent);
+	<span class="hljs-keyword">var</span> popScale = d3.scaleLog()
+	.domain(popExtent)
+	.range([<span class="hljs-number">0</span>, <span class="hljs-number">400</span>]);
+	
+	<span class="hljs-keyword">var</span> gdpExtent = d3.extent(countryData,
+		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.GDP; });
+	<span class="hljs-built_in">console</span>.log(gdpExtent);
+	<span class="hljs-keyword">var</span> gdpScale = d3.scaleLog()
+	.domain(gdpExtent)
+	.range([<span class="hljs-number">400</span>, <span class="hljs-number">0</span>]);
+	
+	countryData = countryData.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population &amp;&amp; d.GDP; });
+	
+	countryData.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
+		svg.append(<span class="hljs-string">"circle"</span>)
+		.attr(<span class="hljs-string">"cx"</span>, popScale(country.Population))
+		.attr(<span class="hljs-string">"cy"</span>, gdpScale(country.GDP))
+		.attr(<span class="hljs-string">"r"</span>, <span class="hljs-number">3</span>)
+		.style(<span class="hljs-string">"opacity"</span>, <span class="hljs-number">0.3</span>)
+		.on(<span class="hljs-string">"mouseover"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+			svg.select(<span class="hljs-string">"#CountryName"</span>).text(country.Country);
+		});
+	});
+});
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code after the d3.tsv() call is executed immediately."</span>);
+
+</span></code></pre>
+
+
+<script>
+document.getElementById("display").innerText = document.getElementById("notes").innerText;
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body></html>

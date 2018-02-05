@@ -1,0 +1,287 @@
+
+<!-- saved from url=(0064)https://mimno.github.io/info3300-spr2017/Notes/021017/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>INFO 3300 - Data-driven Web Applications</title>
+<link href="./index-scale-axes-fin_files/css" rel="stylesheet">
+<link rel="stylesheet" href="./index-scale-axes-fin_files/default.min.css">
+<script src="./index-scale-axes-fin_files/d3.v4.min.js"></script><style></style>
+<script src="./index-scale-axes-fin_files/highlight.min.js"></script>
+<style>
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+svg { border: solid #ccc 1px; }
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+<h3>Notes for Friday, February 10</h3>
+
+<div>
+<ul>
+	<li><a href="http://www.loc.gov/pictures/resource/ppmsca.33873/?co=anedub">Another approach to massive scale differences by W.E.B. Du Bois</a></li>
+	<li><a href="http://bl.ocks.org/emeeks/3993c03914e81f1d57650292b3001b27">An attempt to recreate Du Bois' plot in d3</a></li>
+</ul>
+</div>
+
+<div>
+	<p>More on scales and guides.</p>
+	
+	<p>We're working with <a href="http://data.worldbank.org/data-catalog/country-profiles">Country Profile data</a> from the world bank. Here are some of the issues we face:</p>
+	<ul>
+		<li>Ungrouped data. </li>
+		<li>Wordy variables. </li>
+		<li>Missing data. </li>
+		<li>Incorrect data. </li>
+		<li>Data dispersion.</li>
+	</ul>
+</div>
+
+<!-- Here's an SVG element. Note that in this file it looks like the <div> above. -->
+<svg height="400" width="400">
+  <!-- Visual elements are represented by tags, which have attributes -->
+<text id="CountryName" x="30" y="50" style="font-size: 36pt;"></text><g transform="translate(0, 370)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle"><path class="domain" stroke="#000" d="M30.5,6V0.5H370.5V6"></path><g class="tick" opacity="1" transform="translate(30.5,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1e-2</text></g><g class="tick" opacity="1" transform="translate(50.42370331304471,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2e-2</text></g><g class="tick" opacity="1" transform="translate(62.078322626669724,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(70.34740662608942,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(76.76140647675894,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(82.00202593971443,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(86.43290656149146,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(90.27110993913413,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(93.65664525333946,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(96.68510978980366,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1e-1</text></g><g class="tick" opacity="1" transform="translate(116.60881310284836,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2e-1</text></g><g class="tick" opacity="1" transform="translate(128.2634324164734,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(136.53251641589304,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(142.94651626656258,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(148.18713572951808,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(152.61801635129513,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(156.45621972893775,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(159.8417550431431,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(162.87021957960732,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1e+0</text></g><g class="tick" opacity="1" transform="translate(182.793922892652,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2e+0</text></g><g class="tick" opacity="1" transform="translate(194.448542206277,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(202.71762620569672,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(209.13162605636623,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(214.37224551932172,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(218.80312614109874,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(222.64132951874143,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(226.02686483294676,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(229.0553293694109,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1e+1</text></g><g class="tick" opacity="1" transform="translate(248.97903268245565,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2e+1</text></g><g class="tick" opacity="1" transform="translate(260.63365199608063,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(268.9027359955004,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(275.3167358461699,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(280.55735530912534,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(284.9882359309024,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(288.82643930854505,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(292.2119746227504,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(295.24043915921465,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1e+2</text></g><g class="tick" opacity="1" transform="translate(315.16414247225924,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2e+2</text></g><g class="tick" opacity="1" transform="translate(326.8187617858843,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(335.087845785304,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(341.5018456359735,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(346.7424650989291,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(351.173345720706,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(355.01154909834867,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(358.397084412554,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em"></text></g><g class="tick" opacity="1" transform="translate(361.42554894901826,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1e+3</text></g></g><g transform="translate(30, 0)" fill="none" font-size="10" font-family="sans-serif" text-anchor="end"><path class="domain" stroke="#000" d="M-6,370.5H0.5V30.5H-6"></path><g class="tick" opacity="1" transform="translate(0,370.5)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,363.1494348595193)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,357.4478935864245)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,352.78939516729747)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,348.85069087521975)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,345.43883002681685)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,342.4293554750756)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,339.737288753722)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1e-1</text></g><g class="tick" opacity="1" transform="translate(0,322.02668392101947)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,311.6666442287976)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,304.316079088317)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,298.61453781522215)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,293.9560393960951)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,290.01733510401743)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,286.60547425561447)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,283.5959997038733)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,280.9039329825196)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1e+0</text></g><g class="tick" opacity="1" transform="translate(0,263.1933281498171)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,252.83328845759524)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,245.48272331711462)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,239.78118204401977)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,235.12268362489277)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,231.18397933281506)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,227.7721184844121)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,224.7626439326709)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,222.07057721131727)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1e+1</text></g><g class="tick" opacity="1" transform="translate(0,204.35997237861474)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,193.9999326863929)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,186.6493675459122)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,180.9478262728174)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,176.2893278536904)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,172.35062356161265)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,168.93876271320974)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,165.92928816146855)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,163.23722144011492)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1e+2</text></g><g class="tick" opacity="1" transform="translate(0,145.5266166074124)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,135.1665769151905)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,127.81601177470986)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,122.11447050161502)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,117.45597208248805)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,113.51726779041036)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,110.10540694200739)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,107.09593239026617)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,104.40386566891254)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1e+3</text></g><g class="tick" opacity="1" transform="translate(0,86.69326083621002)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,76.33322114398817)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,68.98265600350749)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,63.281114730412696)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,58.62261631128564)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,54.68391201920792)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,51.272051170805014)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,48.26257661906385)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em"></text></g><g class="tick" opacity="1" transform="translate(0,45.57050989771017)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1e+4</text></g></g><circle cx="262.4609063412871" cy="204.73059671020457" r="6.66689108540534" style="opacity: 0.3; fill: rgb(42, 0, 0);"></circle><circle cx="192.87479390433307" cy="218.2226738475312" r="2.190194051581867" style="opacity: 0.3; fill: rgb(187, 0, 68);"></circle><circle cx="268.1646158128401" cy="149.65855579311437" r="11.823433666827777" style="opacity: 0.3; fill: rgb(195, 0, 0);"></circle><circle cx="254.9160184023756" cy="162.07391483658162" r="8.830734711522673" style="opacity: 0.3; fill: rgb(63, 0, 0);"></circle><circle cx="93.15664525333946" cy="274.49879699266853" r="1.1402657141335717" style="opacity: 0.3; fill: rgb(177, 0, 78);"></circle><circle cx="270.76090005960236" cy="117.68292149181732" r="12.694325327794557" style="opacity: 0.3; fill: rgb(156, 0, 99);"></circle><circle cx="194.13953179909433" cy="220.25104086999298" r="2.2086477730025456" style="opacity: 0.3; fill: rgb(213, 0, 42);"></circle><circle cx="253.4549519845948" cy="96.4422675150326" r="20.513073278568665" style="opacity: 0.3; fill: rgb(79, 0, 176);"></circle><circle cx="224.2535058123798" cy="128.8325146895632" r="3.031433041046105" style="opacity: 0.3; fill: rgb(82, 0, 173);"></circle><circle cx="227.53126790432663" cy="178.9349039429568" r="3.063861157283426" style="opacity: 0.3; fill: rgb(117, 0, 138);"></circle><circle cx="135.30478569871963" cy="224.69208264240848" r="1.826854190295169" style="opacity: 0.3; fill: rgb(112, 0, 143);"></circle><circle cx="171.62813227037057" cy="192.5551945452741" r="1.1983656752636445" style="opacity: 0.3; fill: rgb(33, 0, 222);"></circle><circle cx="308.4292324717549" cy="145.66303165126038" r="3.6944163815485" style="opacity: 0.3; fill: rgb(73, 0, 0);"></circle><circle cx="125.78031318758089" cy="242.60558929274006" r="1.1402657141335717" style="opacity: 0.3; fill: rgb(122, 0, 133);"></circle><circle cx="227.11120448735693" cy="178.19438094899294" r="4.1954733955029315" style="opacity: 0.3; fill: rgb(193, 0, 62);"></circle><circle cx="232.04288370097245" cy="124.01914929456106" r="2.224817692681982" style="opacity: 0.3; fill: rgb(76, 0, 179);"></circle><circle cx="133.00405187942886" cy="266.10518899822006" r="2.0636174393458147" style="opacity: 0.3; fill: rgb(212, 0, 0);"></circle><circle cx="230.9796168304348" cy="226.36228749140562" r="3.3762518913452846" style="opacity: 0.3; fill: rgb(35, 0, 0);"></circle><circle cx="154.85759576298702" cy="261.93807114162286" r="2.3743177121373646" style="opacity: 0.3; fill: rgb(203, 0, 0);"></circle><circle cx="230.55377455332706" cy="191.0646621141537" r="8.350913779720683" style="opacity: 0.3; fill: rgb(230, 0, 0);"></circle><circle cx="200.81880287433717" cy="209.25988291460706" r="2.5869254021091566" style="opacity: 0.3; fill: rgb(178, 0, 77);"></circle><circle cx="185.80692550207402" cy="212.27133028816627" r="6.348981100538418" style="opacity: 0.3; fill: rgb(140, 0, 0);"></circle><circle cx="315.77075970385107" cy="89.2467209494202" r="21.46606071077048" style="opacity: 0.3; fill: rgb(209, 0, 46);"></circle><circle cx="137.4349325012059" cy="215.00486149348768" r="1.534115926686625" style="opacity: 0.3; fill: rgb(147, 0, 108);"></circle><circle cx="219.03290991551853" cy="180.34582613032038" r="3.336592728908642" style="opacity: 0.3; fill: rgb(221, 0, 34);"></circle><circle cx="245.62569032026292" cy="219.88963453682828" r="4.672444631283129" style="opacity: 0.3; fill: rgb(58, 0, 0);"></circle><circle cx="231.76145545581053" cy="251.49547563682728" r="2.1693484100204516" style="opacity: 0.3; fill: rgb(25, 0, 0);"></circle><circle cx="241.30042741043312" cy="206.48116248929665" r="3.983738917706085" style="opacity: 0.3; fill: rgb(97, 0, 0);"></circle><circle cx="252.91812465351455" cy="194.88235070332934" r="5.835608365265419" style="opacity: 0.3; fill: rgb(106, 0, 0);"></circle><circle cx="265.2542553015197" cy="92.69711306684684" r="23.160984083204596" style="opacity: 0.3; fill: rgb(59, 0, 196);"></circle><circle cx="143.57386969813933" cy="268.39486942291194" r="1.4435591342921577" style="opacity: 0.3; fill: rgb(219, 0, 0);"></circle><circle cx="208.05092291278658" cy="268.7162699092594" r="6.535610887642104" style="opacity: 0.3; fill: rgb(23, 0, 0);"></circle><circle cx="238.30883757814854" cy="219.39210278819246" r="8.947015194530378" style="opacity: 0.3; fill: rgb(14, 0, 0);"></circle><circle cx="245.37061307923278" cy="140.2830898177596" r="7.098333213156521" style="opacity: 0.3; fill: rgb(182, 0, 73);"></circle><circle cx="370" cy="42.61731345748433" r="22.687841901144758" style="opacity: 0.3; fill: rgb(253, 0, 2);"></circle><circle cx="273.78075737097873" cy="135.35018725534437" r="8.49372121177979" style="opacity: 0.3; fill: rgb(225, 0, 30);"></circle><circle cx="155.59465737716363" cy="294.76663445143606" r="1.3057020365759018" style="opacity: 0.3; fill: rgb(38, 0, 0);"></circle><circle cx="287.3284290908918" cy="189.38661950229343" r="11.739490911983308" style="opacity: 0.3; fill: rgb(19, 0, 0);"></circle><circle cx="206.35962170270142" cy="225.57323898801187" r="5.101423207863061" style="opacity: 0.3; fill: rgb(39, 0, 0);"></circle><circle cx="207.51806635198335" cy="178.41523696000178" r="2.5853749128262873" style="opacity: 0.3; fill: rgb(205, 0, 50);"></circle><circle cx="252.1189398157467" cy="192.04326356759918" r="4.982780673113877" style="opacity: 0.3; fill: rgb(107, 0, 0);"></circle><circle cx="203.75659279943687" cy="181.10520624236528" r="2.668513585332232" style="opacity: 0.3; fill: rgb(154, 0, 101);"></circle><circle cx="166.88310832538937" cy="204.42836997205305" r="1.6763367804227194" style="opacity: 0.3; fill: rgb(144, 0, 111);"></circle><circle cx="230.09429596315113" cy="146.9965234777427" r="2.9699719079815114" style="opacity: 0.3; fill: rgb(95, 0, 160);"></circle><circle cx="212.29684699839675" cy="135.08822159291086" r="2.4526138398453456" style="opacity: 0.3; fill: rgb(19, 0, 236);"></circle><circle cx="159.0205916129396" cy="266.3988819071949" r="2.06823185337325" style="opacity: 0.3; fill: rgb(61, 0, 0);"></circle><circle cx="85.93290656149146" cy="297.1124093042854" r="1.1983656752636445" style="opacity: 0.3; fill: rgb(165, 0, 90);"></circle><circle cx="230.0397535787288" cy="172.55373676640264" r="2.5476972542621352" style="opacity: 0.3; fill: rgb(245, 0, 10);"></circle><circle cx="242.31544735369957" cy="162.69127097995968" r="4.551244236863742" style="opacity: 0.3; fill: rgb(249, 0, 0);"></circle><circle cx="292.19023126474667" cy="132.17098432766005" r="8.018543699949966" style="opacity: 0.3; fill: rgb(183, 0, 0);"></circle><circle cx="214.48837754073946" cy="197.30413908278547" r="2.0163216540414477" style="opacity: 0.3; fill: rgb(137, 0, 0);"></circle><circle cx="157.6988034289255" cy="216.489738568889" r="2.1756409132632335" style="opacity: 0.3; fill: rgb(109, 0, 0);"></circle><circle cx="170.13183315777655" cy="200.89596225481796" r="2.491044993767222" style="opacity: 0.3; fill: rgb(59, 0, 196);"></circle><circle cx="294.5645648449375" cy="175.1417937301818" r="8.36995892813436" style="opacity: 0.3; fill: rgb(59, 0, 0);"></circle><circle cx="159.0205916129396" cy="242.3738325858069" r="1.9487397051795021" style="opacity: 0.3; fill: rgb(236, 0, 0);"></circle><circle cx="211.26649195346772" cy="141.23984406982095" r="5.079779662548593" style="opacity: 0.3; fill: rgb(37, 0, 218);"></circle><circle cx="283.14755273661285" cy="81.33497021566427" r="6.196934621790331" style="opacity: 0.3; fill: rgb(78, 0, 177);"></circle><circle cx="178.12532705022153" cy="212.50320833535457" r="4.628655318877437" style="opacity: 0.3; fill: rgb(0, 0, 0);"></circle><circle cx="182.1498432528043" cy="281.9849115320244" r="1.745522496883611" style="opacity: 0.3; fill: rgb(87, 0, 0);"></circle><circle cx="199.82091958283496" cy="213.02818539370165" r="2.8515605567531668" style="opacity: 0.3; fill: rgb(231, 0, 0);"></circle><circle cx="288.8286365501887" cy="72.91133776213809" r="5.192748435884468" style="opacity: 0.3; fill: rgb(63, 0, 192);"></circle><circle cx="257.53838696453965" cy="187.77115153677002" r="4.42504059424633" style="opacity: 0.3; fill: rgb(120, 0, 0);"></circle><circle cx="230.82066438131406" cy="145.69317414394934" r="3.5480532343854745" style="opacity: 0.3; fill: rgb(169, 0, 86);"></circle><circle cx="98.92468920149554" cy="280.92013239281266" r="1.121473671719639" style="opacity: 0.3; fill: rgb(236, 0, 19);"></circle><circle cx="242.6694398569304" cy="174.22428106119835" r="3.314384283203932" style="opacity: 0.3; fill: rgb(138, 0, 0);"></circle><circle cx="235.2211684317399" cy="231.8031802215961" r="4.477769511859744" style="opacity: 0.3; fill: rgb(24, 0, 0);"></circle><circle cx="179.89721626979028" cy="278.9151040082993" r="2.3325242842689304" style="opacity: 0.3; fill: rgb(18, 0, 0);"></circle><circle cx="154.85759576298702" cy="250.92493514600648" r="4.251926802182508" style="opacity: 0.3; fill: rgb(195, 0, 0);"></circle><circle cx="230.52694876699746" cy="224.92410241391622" r="2.1693484100204516" style="opacity: 0.3; fill: rgb(62, 0, 0);"></circle><circle cx="222.4273401169884" cy="203.32895768331645" r="3.352327537864144" style="opacity: 0.3; fill: rgb(104, 0, 0);"></circle><circle cx="219.54868602288244" cy="133.8923084365834" r="1.2326043723661537" style="opacity: 0.3; fill: rgb(77, 0, 178);"></circle><circle cx="228.0917091900225" cy="157.7150918379075" r="3.1387646914809713" style="opacity: 0.3; fill: rgb(139, 0, 116);"></circle><circle cx="130.50301182816526" cy="208.62087975953756" r="3.2508167783186432" style="opacity: 0.3; fill: rgb(9, 0, 246);"></circle><circle cx="368.7101922450324" cy="85.0026535153836" r="13.715727179018607" style="opacity: 0.3; fill: rgb(133, 0, 0);"></circle><circle cx="321.9344722602387" cy="107.70026463489307" r="10.69483700169591" style="opacity: 0.3; fill: rgb(112, 0, 0);"></circle><circle cx="265.7076750242703" cy="147.7087487596769" r="5.626111256029601" style="opacity: 0.3; fill: rgb(88, 0, 0);"></circle><circle cx="206.48378529951032" cy="136.09398702292714" r="2.859512893519751" style="opacity: 0.3; fill: rgb(101, 0, 154);"></circle><circle cx="223.47522631543166" cy="134.71602333221924" r="2.0425998746007004" style="opacity: 0.3; fill: rgb(108, 0, 147);"></circle><circle cx="280.43807382819693" cy="88.58194332893493" r="4.8496486788244955" style="opacity: 0.3; fill: rgb(175, 0, 80);"></circle><circle cx="191.2376922602111" cy="212.50320833535457" r="1.7355596103909752" style="opacity: 0.3; fill: rgb(220, 0, 0);"></circle><circle cx="301.6016452271161" cy="66.14583005084125" r="5.311887600636616" style="opacity: 0.3; fill: rgb(34, 0, 221);"></circle><circle cx="220.6291181588214" cy="187.78476784498636" r="3.095787573403549" style="opacity: 0.3; fill: rgb(238, 0, 17);"></circle><circle cx="244.70645451132359" cy="147.10300054352237" r="12.57702086384502" style="opacity: 0.3; fill: rgb(138, 0, 117);"></circle><circle cx="272.4512555468201" cy="174.3809745421016" r="6.343000728485128" style="opacity: 0.3; fill: rgb(233, 0, 0);"></circle><circle cx="98.92468920149554" cy="327.2282251941143" r="1.1983656752636445" style="opacity: 0.3; fill: rgb(66, 0, 0);"></circle><circle cx="275.1709675871201" cy="95.71377749623372" r="3.221119873683377" style="opacity: 0.3; fill: rgb(52, 0, 203);"></circle><circle cx="179.26545835618782" cy="232.97365975750694" r="1.7322085241228573" style="opacity: 0.3; fill: rgb(0, 0, 0);"></circle><circle cx="201.41609871380015" cy="159.38035438503772" r="1.935689018842445" style="opacity: 0.3; fill: rgb(91, 0, 164);"></circle><circle cx="213.67997839464948" cy="232.30381872899451" r="4.135652509934745" style="opacity: 0.3; fill: rgb(154, 0, 0);"></circle><circle cx="217.4699133680596" cy="216.1361578105581" r="4.4128121208688444" style="opacity: 0.3; fill: rgb(93, 0, 0);"></circle><circle cx="182.0050377678797" cy="196.19199940774655" r="2.781153664911" style="opacity: 0.3; fill: rgb(106, 0, 149);"></circle><circle cx="213.1445148021483" cy="181.9853507272172" r="1.718647933439436" style="opacity: 0.3; fill: rgb(133, 0, 122);"></circle><circle cx="184.23869144478678" cy="259.34542478603106" r="2.222808146303607" style="opacity: 0.3; fill: rgb(82, 0, 0);"></circle><circle cx="205.60316151990205" cy="262.06240716198045" r="3.3407990198541464" style="opacity: 0.3; fill: rgb(30, 0, 0);"></circle><circle cx="193.07302798635976" cy="185.41272241308016" r="2.7921655389914983" style="opacity: 0.3; fill: rgb(146, 0, 109);"></circle><circle cx="146.21277009983947" cy="176.74822659252743" r="1.3576088067275545" style="opacity: 0.3; fill: rgb(14, 0, 241);"></circle><circle cx="147.20403481202996" cy="182.47852283752894" r="1" style="opacity: 0.3; fill: rgb(114, 0, 141);"></circle><circle cx="183.42127632422876" cy="221.3416468437362" r="2.1243152287370317" style="opacity: 0.3; fill: rgb(151, 0, 104);"></circle><circle cx="254.00566274365812" cy="222.24369217167137" r="6.374666631687661" style="opacity: 0.3; fill: rgb(21, 0, 0);"></circle><circle cx="244.17720912542455" cy="232.97365975750694" r="3.414241475870837" style="opacity: 0.3; fill: rgb(47, 0, 0);"></circle><circle cx="260.4481077504995" cy="134.9853900893224" r="5.033706379284255" style="opacity: 0.3; fill: rgb(147, 0, 108);"></circle><circle cx="136.74227662421865" cy="248.83639923866653" r="1.121473671719639" style="opacity: 0.3; fill: rgb(232, 0, 23);"></circle><circle cx="244.80461224347803" cy="215.36305897326008" r="8.810294231053227" style="opacity: 0.3; fill: rgb(53, 0, 0);"></circle><circle cx="138.11128907071594" cy="222.21747256776635" r="1.121473671719639" style="opacity: 0.3; fill: rgb(121, 0, 134);"></circle><circle cx="76.26140647675894" cy="324.21875064237315" r="1.0991828376318222" style="opacity: 0.3; fill: rgb(98, 0, 0);"></circle><circle cx="169.01325512787562" cy="217.6026884480332" r="1.3136436717152193" style="opacity: 0.3; fill: rgb(254, 0, 1);"></circle><circle cx="301.61522605796915" cy="100.47115732254838" r="10.829614688635539" style="opacity: 0.3; fill: rgb(217, 0, 38);"></circle><circle cx="96.18510978980366" cy="310.3288314080296" r="1.185554098533154" style="opacity: 0.3; fill: rgb(161, 0, 0);"></circle><circle cx="198.78714353602155" cy="232.30381872899451" r="2.291282842788024" style="opacity: 0.3; fill: rgb(254, 0, 0);"></circle><circle cx="193.56271321906755" cy="217.47176927981477" r="9.771094487731713" style="opacity: 0.3; fill: rgb(109, 0, 0);"></circle><circle cx="148.62964075577358" cy="245.0466808017315" r="1.8238745258644238" style="opacity: 0.3; fill: rgb(181, 0, 74);"></circle><circle cx="264.05079241188054" cy="162.58691350338808" r="5.686848235414076" style="opacity: 0.3; fill: rgb(219, 0, 36);"></circle><circle cx="258.1299941253955" cy="211.5362507747608" r="7.270520665539632" style="opacity: 0.3; fill: rgb(46, 0, 0);"></circle><circle cx="276.9756121142821" cy="174.70543606733975" r="6.7688271732311" style="opacity: 0.3; fill: rgb(111, 0, 0);"></circle><circle cx="188.24430256393308" cy="218.02174750337028" r="7.36743003176374" style="opacity: 0.3; fill: rgb(114, 0, 0);"></circle><circle cx="258.6693701510927" cy="202.38319860714847" r="3.6907629339270134" style="opacity: 0.3; fill: rgb(90, 0, 0);"></circle><circle cx="243.70598827752724" cy="111.24489354891278" r="2.428714919340222" style="opacity: 0.3; fill: rgb(35, 0, 220);"></circle><circle cx="206.2349194335045" cy="148.62163954312345" r="4.628655318877437" style="opacity: 0.3; fill: rgb(60, 0, 195);"></circle><circle cx="214.25296403839332" cy="215.48358278995383" r="3.5325634055274264" style="opacity: 0.3; fill: rgb(100, 0, 0);"></circle><circle cx="248.33495304260794" cy="230.17800236785268" r="8.894231153395317" style="opacity: 0.3; fill: rgb(11, 0, 0);"></circle><circle cx="311.98486180774773" cy="122.60061930378058" r="7.740785544842325" style="opacity: 0.3; fill: rgb(242, 0, 0);"></circle><circle cx="209.75897948794298" cy="128.18795797193349" r="5.352759486880593" style="opacity: 0.3; fill: rgb(16, 0, 239);"></circle><circle cx="205.53921526890994" cy="171.912751466066" r="4.901681893348547" style="opacity: 0.3; fill: rgb(132, 0, 123);"></circle><circle cx="313.0259247457501" cy="137.25947133996485" r="7.2575646249022485" style="opacity: 0.3; fill: rgb(92, 0, 0);"></circle><circle cx="49.92370331304471" cy="312.03286283544105" r="1.1568218358576097" style="opacity: 0.3; fill: rgb(0, 0, 0);"></circle><circle cx="201.7101557844463" cy="179.38189997152386" r="2.9257823607105915" style="opacity: 0.3; fill: rgb(249, 0, 6);"></circle><circle cx="216.7855041782515" cy="196.10697103722075" r="5.4731349813016665" style="opacity: 0.3; fill: rgb(226, 0, 0);"></circle><circle cx="261.4263586811616" cy="146.45717913048247" r="8.950727885783849" style="opacity: 0.3; fill: rgb(209, 0, 0);"></circle><circle cx="294.94094500041075" cy="135.31784033759834" r="4.84133478377642" style="opacity: 0.3; fill: rgb(208, 0, 0);"></circle><circle cx="266.9283703658217" cy="122.81395890095072" r="4.921800270459359" style="opacity: 0.3; fill: rgb(163, 0, 92);"></circle><circle cx="229.54415806075448" cy="145.1649658971159" r="3.12954583524349" style="opacity: 0.3; fill: rgb(160, 0, 95);"></circle><circle cx="185.551423126715" cy="149.99748948895765" r="1.7553539873996988" style="opacity: 0.3; fill: rgb(1, 0, 0);"></circle><circle cx="248.23366585209132" cy="148.01135060796597" r="4.424322481104094" style="opacity: 0.3; fill: rgb(225, 0, 30);"></circle><circle cx="305.24163214907577" cy="96.59402293256727" r="30" style="opacity: 0.3; fill: rgb(136, 0, 119);"></circle><circle cx="232.8462569507251" cy="226.95471065402452" r="2.1373638113691262" style="opacity: 0.3; fill: rgb(92, 0, 0);"></circle><circle cx="114.63444747316974" cy="287.41606931095544" r="1.3711081970663082" style="opacity: 0.3; fill: rgb(130, 0, 0);"></circle><circle cx="114.63444747316974" cy="309.5176203614118" r="1.221779567146079" style="opacity: 0.3; fill: rgb(132, 0, 0);"></circle><circle cx="261.5725450253318" cy="115.06852345151299" r="11.282778000842402" style="opacity: 0.3; fill: rgb(155, 0, 100);"></circle><circle cx="240.45798856510615" cy="213.69525450836332" r="4.110453487607372" style="opacity: 0.3; fill: rgb(111, 0, 0);"></circle><circle cx="218.71084684906623" cy="188.03111042361223" r="3.0851997492014007" style="opacity: 0.3; fill: rgb(177, 0, 78);"></circle><circle cx="93.15664525333946" cy="271.0869361442656" r="1.1568218358576097" style="opacity: 0.3; fill: rgb(214, 0, 41);"></circle><circle cx="215.9510181741446" cy="243.67532233662791" r="2.885778500771817" style="opacity: 0.3; fill: rgb(13, 0, 0);"></circle><circle cx="211.5794949879495" cy="135.29251594340863" r="1.185554098533154" style="opacity: 0.3; fill: rgb(91, 0, 164);"></circle><circle cx="210.95004294478798" cy="166.21926132580668" r="2.552456970022552" style="opacity: 0.3; fill: rgb(77, 0, 179);"></circle><circle cx="183.1435560191602" cy="184.43853715978838" r="1.9992394012403096" style="opacity: 0.3; fill: rgb(137, 0, 118);"></circle><circle cx="146.71267536037615" cy="277.2811500332779" r="2.192258570135359" style="opacity: 0.3; fill: rgb(51, 0, 0);"></circle><circle cx="230.7408573111673" cy="234.92253117722223" r="6.600537893141452" style="opacity: 0.3; fill: rgb(9, 0, 0);"></circle><circle cx="277.5354030503436" cy="133.45484231781865" r="8.743569438799486" style="opacity: 0.3; fill: rgb(245, 0, 10);"></circle><circle cx="234.59903323944508" cy="224.2059269243362" r="6.629445217494918" style="opacity: 0.3; fill: rgb(91, 0, 0);"></circle><circle cx="272.6812820009324" cy="99.2653900444522" r="5.988315010354871" style="opacity: 0.3; fill: rgb(109, 0, 146);"></circle><circle cx="249.84035679798825" cy="167.7083245527787" r="2.7962775876989996" style="opacity: 0.3; fill: rgb(153, 0, 0);"></circle><circle cx="81.50202593971443" cy="283.67020368337523" r="1.121473671719639" style="opacity: 0.3; fill: rgb(124, 0, 131);"></circle><circle cx="113.08034856638416" cy="271.26499262624884" r="1.1717897140171707" style="opacity: 0.3; fill: rgb(243, 0, 12);"></circle><circle cx="98.92468920149554" cy="288.0974697391754" r="1.1402657141335717" style="opacity: 0.3; fill: rgb(246, 0, 9);"></circle><circle cx="268.5675396485692" cy="163.47337344337163" r="10.61459827204142" style="opacity: 0.3; fill: rgb(136, 0, 0);"></circle><circle cx="144.65867119305392" cy="238.5259250358255" r="3.8384319077430136" style="opacity: 0.3; fill: rgb(218, 0, 0);"></circle><circle cx="169.68961169738566" cy="244.22746630892036" r="1.9251159221529681" style="opacity: 0.3; fill: rgb(155, 0, 0);"></circle><circle cx="227.97462622583126" cy="121.83928340152855" r="5.691044161263763" style="opacity: 0.3; fill: rgb(48, 0, 207);"></circle><circle cx="223.16485203199872" cy="114.10635912627279" r="2.42526807494753" style="opacity: 0.3; fill: rgb(61, 0, 194);"></circle><circle cx="223.81620098961622" cy="227.75574809837244" r="3.637219244479912" style="opacity: 0.3; fill: rgb(97, 0, 0);"></circle><circle cx="276.7453818431661" cy="182.7846598396834" r="7.825984537562148" style="opacity: 0.3; fill: rgb(28, 0, 0);"></circle><circle cx="283.63811004883405" cy="127.6264179930725" r="6.023686605734571" style="opacity: 0.3; fill: rgb(200, 0, 0);"></circle><circle cx="168.7842194302768" cy="271.0869361442656" r="1.8560806202760236" style="opacity: 0.3; fill: rgb(68, 0, 0);"></circle><circle cx="219.50933786072696" cy="244.41419796898688" r="2.6714588896287337" style="opacity: 0.3; fill: rgb(36, 0, 0);"></circle><circle cx="98.92468920149554" cy="301.38080851607776" r="1.1983656752636445" style="opacity: 0.3; fill: rgb(230, 0, 0);"></circle><circle cx="171.2085068913007" cy="199.67425619406066" r="1.5008487792316765" style="opacity: 0.3; fill: rgb(157, 0, 98);"></circle><circle cx="231.5809193793498" cy="184.28962077041044" r="3.836698514049906" style="opacity: 0.3; fill: rgb(247, 0, 0);"></circle><circle cx="287.84455632406554" cy="112.372818146891" r="7.2153698962580295" style="opacity: 0.3; fill: rgb(236, 0, 19);"></circle><circle cx="210.68364782236588" cy="188.94811918953744" r="5.899772719478872" style="opacity: 0.3; fill: rgb(77, 0, 0);"></circle><circle cx="30" cy="370" r="1" style="opacity: 0.3; fill: rgb(218, 0, 0);"></circle><circle cx="267.6971074154912" cy="195.69530190602882" r="4.447227903560498" style="opacity: 0.3; fill: rgb(98, 0, 0);"></circle><circle cx="271.91573860492235" cy="165.25387366347624" r="6.448740779038205" style="opacity: 0.3; fill: rgb(251, 0, 0);"></circle><circle cx="226.03337711062912" cy="129.28729862407232" r="3.027797905939538" style="opacity: 0.3; fill: rgb(45, 0, 210);"></circle><circle cx="282.41993233523283" cy="77.07219456374844" r="4.461466823745839" style="opacity: 0.3; fill: rgb(41, 0, 214);"></circle><circle cx="328.3011145024775" cy="30" r="22.990313624662814" style="opacity: 0.3; fill: rgb(130, 0, 125);"></circle><circle cx="197.7987196844744" cy="178.7477514358746" r="3.9439096932985342" style="opacity: 0.3; fill: rgb(181, 0, 74);"></circle><circle cx="261.3529857556381" cy="173.07299920325414" r="5.691044161263763" style="opacity: 0.3; fill: rgb(218, 0, 0);"></circle><circle cx="123.65016638509462" cy="288.0974697391754" r="1.7746427254694424" style="opacity: 0.3; fill: rgb(114, 0, 0);"></circle><circle cx="292.24984950907174" cy="145.85761673602877" r="5.034925574228006" style="opacity: 0.3; fill: rgb(241, 0, 14);"></circle><circle cx="205.08756333726114" cy="215.50372548060145" r="1.543246774883213" style="opacity: 0.3; fill: rgb(217, 0, 38);"></circle><circle cx="256.92363564838274" cy="187.64215723236902" r="6.096106468770949" style="opacity: 0.3; fill: rgb(128, 0, 0);"></circle><circle cx="242.4398412391959" cy="202.4314763763783" r="7.0842021959559895" style="opacity: 0.3; fill: rgb(107, 0, 0);"></circle><circle cx="241.33730211461273" cy="212.21811749191826" r="5.384285316729356" style="opacity: 0.3; fill: rgb(84, 0, 0);"></circle></svg>
+
+<script id="notes">
+
+var svg = d3.select("svg");
+
+svg.append("text")
+.attr("id", "CountryName")
+.attr("x", 30)
+.attr("y", 50)
+.style("font-size", "36pt");
+
+// Define variables outside the scope of the callback function.
+var countryData;
+var rawData, nestedData;
+
+// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.
+function parseLine (line) {
+	return { 
+		Country: line["Country Name"],
+		Variable: line["Series Name"],
+		value: Number(line["2015 [YR2015]"])
+	};
+}
+
+// Some data from http://data.worldbank.org/data-catalog/country-profiles
+
+d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
+	rawData = data;
+	
+	console.log("Code in the call-back function is only executed when the data file loads.");
+	
+	nestedData = d3.nest()
+	.key(function (d) { return d.Country; })
+	.entries(data);
+	
+	countryData = nestedData.map(function (country) {
+		var result = { Country: country.key };
+		
+		country.values.forEach(function (d) {
+			if (d.Variable == "Population, total") {
+				result.Population = d.value;
+			}
+			else if (d.Variable == "GDP (current US$)") {
+				result.GDP = d.value;
+			}
+			else if (d.Variable == "Surface area (sq. km)") {
+				result.Area = d.value;
+			}
+			else if (d.Variable == "Internet users (per 100 people)") {
+				result.Internet = d.value;
+			}
+			
+		});
+		
+		// Fix this here, rather than in the data file.
+		if (result.Country == "Qatar") {
+			result.GDP /= 1000000;
+		}
+		
+		return result;
+	});
+	
+	var popExtent = d3.extent(countryData,
+		function (d) { return d.Population; });
+	console.log(popExtent);
+	var popScale = d3.scaleLog()
+	.domain(popExtent)
+	.range([30, 370]);
+	
+	var popAxis = d3.axisBottom(popScale);
+	svg.append("g").attr("transform", "translate(0, 370)").call(popAxis);
+	
+	var gdpExtent = d3.extent(countryData,
+		function (d) { return d.GDP; });
+	console.log(gdpExtent);
+	var gdpScale = d3.scaleLog()
+	.domain(gdpExtent)
+	.range([370, 30]);
+	
+	var gdpAxis = d3.axisLeft(gdpScale);
+	svg.append("g").attr("transform", "translate(30, 0)").call(gdpAxis);
+	
+	var areaExtent = d3.extent(countryData,
+		function (d) { return d.Area; });
+	console.log(areaExtent);
+	var areaScale = d3.scaleSqrt()
+	.domain(areaExtent)
+	.range([1, 30]);
+	
+	var internetScale = d3.scaleLinear()
+	.domain([0, 50, 100])
+	.range(["#000000", "#ff0000", "#0000ff"]);
+	
+	countryData = countryData.filter(function (d) { return d.Population && d.GDP; });
+	
+	countryData.forEach(function (country) {
+		svg.append("circle")
+		.attr("cx", popScale(country.Population))
+		.attr("cy", gdpScale(country.GDP))
+		.attr("r", areaScale(country.Area))
+		.style("opacity", 0.3)
+		.style("fill", internetScale(country.Internet))
+		.on("mouseover", function () {
+			svg.select("#CountryName").text(country.Country);
+		});
+	});
+});
+
+console.log("Code after the d3.tsv() call is executed immediately.");
+
+</script>
+
+<!-- This block will be automatically filled with syntax-highlighted code from the script below -->
+<pre><code id="display" class="hljs http">
+
+<span class="javascript"><span class="hljs-keyword">var</span> svg = d3.select(<span class="hljs-string">"svg"</span>);
+
+svg.append(<span class="hljs-string">"text"</span>)
+.attr(<span class="hljs-string">"id"</span>, <span class="hljs-string">"CountryName"</span>)
+.attr(<span class="hljs-string">"x"</span>, <span class="hljs-number">30</span>)
+.attr(<span class="hljs-string">"y"</span>, <span class="hljs-number">50</span>)
+.style(<span class="hljs-string">"font-size"</span>, <span class="hljs-string">"36pt"</span>);
+
+<span class="hljs-comment">// Define variables outside the scope of the callback function.</span>
+<span class="hljs-keyword">var</span> countryData;
+<span class="hljs-keyword">var</span> rawData, nestedData;
+
+<span class="hljs-comment">// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseLine</span> (<span class="hljs-params">line</span>) </span>{
+	<span class="hljs-keyword">return</span> { 
+		<span class="hljs-attr">Country</span>: line[<span class="hljs-string">"Country Name"</span>],
+		<span class="hljs-attr">Variable</span>: line[<span class="hljs-string">"Series Name"</span>],
+		<span class="hljs-attr">value</span>: <span class="hljs-built_in">Number</span>(line[<span class="hljs-string">"2015 [YR2015]"</span>])
+	};
+}
+
+<span class="hljs-comment">// Some data from http://data.worldbank.org/data-catalog/country-profiles</span>
+
+d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, data</span>) </span>{
+	rawData = data;
+	
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code in the call-back function is only executed when the data file loads."</span>);
+	
+	nestedData = d3.nest()
+	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Country; })
+	.entries(data);
+	
+	countryData = nestedData.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
+		<span class="hljs-keyword">var</span> result = { <span class="hljs-attr">Country</span>: country.key };
+		
+		country.values.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+			<span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Population, total"</span>) {
+				result.Population = d.value;
+			}
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"GDP (current US$)"</span>) {
+				result.GDP = d.value;
+			}
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Surface area (sq. km)"</span>) {
+				result.Area = d.value;
+			}
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Internet users (per 100 people)"</span>) {
+				result.Internet = d.value;
+			}
+			
+		});
+		
+		<span class="hljs-comment">// Fix this here, rather than in the data file.</span>
+		<span class="hljs-keyword">if</span> (result.Country == <span class="hljs-string">"Qatar"</span>) {
+			result.GDP /= <span class="hljs-number">1000000</span>;
+		}
+		
+		<span class="hljs-keyword">return</span> result;
+	});
+	
+	<span class="hljs-keyword">var</span> popExtent = d3.extent(countryData,
+		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population; });
+	<span class="hljs-built_in">console</span>.log(popExtent);
+	<span class="hljs-keyword">var</span> popScale = d3.scaleLog()
+	.domain(popExtent)
+	.range([<span class="hljs-number">30</span>, <span class="hljs-number">370</span>]);
+	
+	<span class="hljs-keyword">var</span> popAxis = d3.axisBottom(popScale);
+	svg.append(<span class="hljs-string">"g"</span>).attr(<span class="hljs-string">"transform"</span>, <span class="hljs-string">"translate(0, 370)"</span>).call(popAxis);
+	
+	<span class="hljs-keyword">var</span> gdpExtent = d3.extent(countryData,
+		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.GDP; });
+	<span class="hljs-built_in">console</span>.log(gdpExtent);
+	<span class="hljs-keyword">var</span> gdpScale = d3.scaleLog()
+	.domain(gdpExtent)
+	.range([<span class="hljs-number">370</span>, <span class="hljs-number">30</span>]);
+	
+	<span class="hljs-keyword">var</span> gdpAxis = d3.axisLeft(gdpScale);
+	svg.append(<span class="hljs-string">"g"</span>).attr(<span class="hljs-string">"transform"</span>, <span class="hljs-string">"translate(30, 0)"</span>).call(gdpAxis);
+	
+	<span class="hljs-keyword">var</span> areaExtent = d3.extent(countryData,
+		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Area; });
+	<span class="hljs-built_in">console</span>.log(areaExtent);
+	<span class="hljs-keyword">var</span> areaScale = d3.scaleSqrt()
+	.domain(areaExtent)
+	.range([<span class="hljs-number">1</span>, <span class="hljs-number">30</span>]);
+	
+	<span class="hljs-keyword">var</span> internetScale = d3.scaleLinear()
+	.domain([<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">100</span>])
+	.range([<span class="hljs-string">"#000000"</span>, <span class="hljs-string">"#ff0000"</span>, <span class="hljs-string">"#0000ff"</span>]);
+	
+	countryData = countryData.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population &amp;&amp; d.GDP; });
+	
+	countryData.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
+		svg.append(<span class="hljs-string">"circle"</span>)
+		.attr(<span class="hljs-string">"cx"</span>, popScale(country.Population))
+		.attr(<span class="hljs-string">"cy"</span>, gdpScale(country.GDP))
+		.attr(<span class="hljs-string">"r"</span>, areaScale(country.Area))
+		.style(<span class="hljs-string">"opacity"</span>, <span class="hljs-number">0.3</span>)
+		.style(<span class="hljs-string">"fill"</span>, internetScale(country.Internet))
+		.on(<span class="hljs-string">"mouseover"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+			svg.select(<span class="hljs-string">"#CountryName"</span>).text(country.Country);
+		});
+	});
+});
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code after the d3.tsv() call is executed immediately."</span>);
+
+</span></code></pre>
+
+
+<script>
+document.getElementById("display").innerText = document.getElementById("notes").innerText;
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body></html>
