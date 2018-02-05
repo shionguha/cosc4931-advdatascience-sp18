@@ -1,7 +1,6 @@
 
-<!-- saved from url=(0066)https://mimno.github.io/info3300-spr2017/Prompts/021017/index.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC/MATH/MSCS 4931/5931: Advanced Data Science</title>
 <link href="./index-scale-axes_files/css" rel="stylesheet">
 <link rel="stylesheet" href="./index-scale-axes_files/default.min.css">
 <script src="./index-scale-axes_files/d3.v4.min.js"></script><style></style>
@@ -25,7 +24,7 @@ svg { border: solid #ccc 1px; }
 }
 </style></head>
 <body>
-<h3>Prompt for Friday, February 10</h3>
+<h3>Prompt for Monday, February 05</h3>
 
 <div>
 <ul>
@@ -36,7 +35,7 @@ svg { border: solid #ccc 1px; }
 
 <div>
 	<p>More on scales and guides.</p>
-	
+
 	<p>We're working with <a href="http://data.worldbank.org/data-catalog/country-profiles">Country Profile data</a> from the world bank. Here are some of the issues we face:</p>
 	<ul>
 		<li>Ungrouped data. </li>
@@ -68,7 +67,7 @@ var rawData, nestedData;
 
 // This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.
 function parseLine (line) {
-	return { 
+	return {
 		Country: line["Country Name"],
 		Variable: line["Series Name"],
 		value: Number(line["2015 [YR2015]"])
@@ -79,16 +78,16 @@ function parseLine (line) {
 
 d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 	rawData = data;
-	
+
 	console.log("Code in the call-back function is only executed when the data file loads.");
-	
+
 	nestedData = d3.nest()
 	.key(function (d) { return d.Country; })
 	.entries(data);
-	
+
 	countryData = nestedData.map(function (country) {
 		var result = { Country: country.key };
-		
+
 		country.values.forEach(function (d) {
 			if (d.Variable == "Population, total") {
 				result.Population = d.value;
@@ -100,31 +99,31 @@ d3.tsv("CountryProfile.tsv", parseLine, function (error, data) {
 				result.Area = d.value;
 			}
 		});
-		
+
 		// Fix this here, rather than in the data file.
 		if (result.Country == "Qatar") {
 			//result.GDP /= 1000000;
 		}
-		
+
 		return result;
 	});
-	
+
 	var popExtent = d3.extent(countryData,
 		function (d) { return d.Population; });
 	console.log(popExtent);
 	var popScale = d3.scaleLog()
 	.domain(popExtent)
 	.range([0, 400]);
-	
+
 	var gdpExtent = d3.extent(countryData,
 		function (d) { return d.GDP; });
 	console.log(gdpExtent);
 	var gdpScale = d3.scaleLog()
 	.domain(gdpExtent)
 	.range([400, 0]);
-	
+
 	countryData = countryData.filter(function (d) { return d.Population && d.GDP; });
-	
+
 	countryData.forEach(function (country) {
 		svg.append("circle")
 		.attr("cx", popScale(country.Population))
@@ -158,7 +157,7 @@ svg.append(<span class="hljs-string">"text"</span>)
 
 <span class="hljs-comment">// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseLine</span> (<span class="hljs-params">line</span>) </span>{
-	<span class="hljs-keyword">return</span> { 
+	<span class="hljs-keyword">return</span> {
 		<span class="hljs-attr">Country</span>: line[<span class="hljs-string">"Country Name"</span>],
 		<span class="hljs-attr">Variable</span>: line[<span class="hljs-string">"Series Name"</span>],
 		<span class="hljs-attr">value</span>: <span class="hljs-built_in">Number</span>(line[<span class="hljs-string">"2015 [YR2015]"</span>])
@@ -169,16 +168,16 @@ svg.append(<span class="hljs-string">"text"</span>)
 
 d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, data</span>) </span>{
 	rawData = data;
-	
+
 	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code in the call-back function is only executed when the data file loads."</span>);
-	
+
 	nestedData = d3.nest()
 	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Country; })
 	.entries(data);
-	
+
 	countryData = nestedData.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
 		<span class="hljs-keyword">var</span> result = { <span class="hljs-attr">Country</span>: country.key };
-		
+
 		country.values.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 			<span class="hljs-keyword">if</span> (d.Variable == <span class="hljs-string">"Population, total"</span>) {
 				result.Population = d.value;
@@ -190,31 +189,31 @@ d3.tsv(<span class="hljs-string">"CountryProfile.tsv"</span>, parseLine, <span c
 				result.Area = d.value;
 			}
 		});
-		
+
 		<span class="hljs-comment">// Fix this here, rather than in the data file.</span>
 		<span class="hljs-keyword">if</span> (result.Country == <span class="hljs-string">"Qatar"</span>) {
 			<span class="hljs-comment">//result.GDP /= 1000000;</span>
 		}
-		
+
 		<span class="hljs-keyword">return</span> result;
 	});
-	
+
 	<span class="hljs-keyword">var</span> popExtent = d3.extent(countryData,
 		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population; });
 	<span class="hljs-built_in">console</span>.log(popExtent);
 	<span class="hljs-keyword">var</span> popScale = d3.scaleLog()
 	.domain(popExtent)
 	.range([<span class="hljs-number">0</span>, <span class="hljs-number">400</span>]);
-	
+
 	<span class="hljs-keyword">var</span> gdpExtent = d3.extent(countryData,
 		<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.GDP; });
 	<span class="hljs-built_in">console</span>.log(gdpExtent);
 	<span class="hljs-keyword">var</span> gdpScale = d3.scaleLog()
 	.domain(gdpExtent)
 	.range([<span class="hljs-number">400</span>, <span class="hljs-number">0</span>]);
-	
+
 	countryData = countryData.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Population &amp;&amp; d.GDP; });
-	
+
 	countryData.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">country</span>) </span>{
 		svg.append(<span class="hljs-string">"circle"</span>)
 		.attr(<span class="hljs-string">"cx"</span>, popScale(country.Population))
