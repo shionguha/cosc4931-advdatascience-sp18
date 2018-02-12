@@ -1,0 +1,190 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>COSC/MATH/MSCS 4931/5931: Advanced Data Science</title>
+<link href="./index-trend_files/css" rel="stylesheet">
+<link rel="stylesheet" href="./index-trend_files/default.min.css">
+<script src="./index-trend_files/d3.v4.min.js"></script><style></style>
+<script src="./index-trend_files/highlight.min.js"></script>
+<style>
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+svg { border: solid #ccc 1px; }
+path.lineGraph { fill: none; stroke-width: 2; }
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+<h3>Prompt for Monday, February 13</h3>
+
+<div>
+<ul>
+	<li><a href="https://www.washingtonpost.com/graphics/health/candy-dish/">Candy consumption at WaPo graphics [paywall]</a></li>
+</ul>
+</div>
+
+<div>
+	<p>Lines, areas; the <a href="https://bl.ocks.org/mbostock/3808218">data join</a></p>
+
+	<p>We're working with <a href="https://www.bls.gov/data/">Bureau of Labor Statistics data</a>. We're considering:</p>
+	<ul>
+		<li>Asynchronous data loading. </li>
+		<li>Data nesting and summarization. </li>
+		<li>Generation of path strings. </li>
+		<li>Seasonal adjustment.</li>
+		<li>Data dispersion.</li>
+	</ul>
+</div>
+
+<!-- Here's an SVG element. Note that in this file it looks like the <div> above. -->
+<svg height="400" width="400">
+  <!-- Visual elements are represented by tags, which have attributes -->
+<text id="SectorName" x="10" y="28" style="font-size: 18pt;"></text><g transform="translate(40,30)"><g fill="none" font-size="10" font-family="sans-serif" text-anchor="middle" transform="translate(0,350)"><path class="domain" stroke="#000" d="M0.5,6V0.5H350.5V6"></path><g class="tick" opacity="1" transform="translate(0.5089004170481131,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1990</text></g><g class="tick" opacity="1" transform="translate(26.498118197538396,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1992</text></g><g class="tick" opacity="1" transform="translate(52.52293764622114,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1994</text></g><g class="tick" opacity="1" transform="translate(78.51215542671143,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1996</text></g><g class="tick" opacity="1" transform="translate(104.53697487539416,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">1998</text></g><g class="tick" opacity="1" transform="translate(130.52619265588444,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2000</text></g><g class="tick" opacity="1" transform="translate(156.55101210456718,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2002</text></g><g class="tick" opacity="1" transform="translate(182.54022988505744,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2004</text></g><g class="tick" opacity="1" transform="translate(208.5650493337402,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2006</text></g><g class="tick" opacity="1" transform="translate(234.5542671142305,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2008</text></g><g class="tick" opacity="1" transform="translate(260.57908656291323,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2010</text></g><g class="tick" opacity="1" transform="translate(286.56830434340355,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2012</text></g><g class="tick" opacity="1" transform="translate(312.59312379208626,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2014</text></g><g class="tick" opacity="1" transform="translate(338.5823415725765,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2016</text></g></g><g fill="none" font-size="10" font-family="sans-serif" text-anchor="end" transform="translate(0,0)"><path class="domain" stroke="#000" d="M-6,350.5H0.5V0.5H-6"></path><g class="tick" opacity="1" transform="translate(0,350.5)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">0</text></g><g class="tick" opacity="1" transform="translate(0,320.0652173913044)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">200</text></g><g class="tick" opacity="1" transform="translate(0,289.6304347826087)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">400</text></g><g class="tick" opacity="1" transform="translate(0,259.19565217391306)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">600</text></g><g class="tick" opacity="1" transform="translate(0,228.76086956521738)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">800</text></g><g class="tick" opacity="1" transform="translate(0,198.32608695652175)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,000</text></g><g class="tick" opacity="1" transform="translate(0,167.8913043478261)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,200</text></g><g class="tick" opacity="1" transform="translate(0,137.4565217391304)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,400</text></g><g class="tick" opacity="1" transform="translate(0,107.02173913043478)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,600</text></g><g class="tick" opacity="1" transform="translate(0,76.58695652173913)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,800</text></g><g class="tick" opacity="1" transform="translate(0,46.1521739130435)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">2,000</text></g><g class="tick" opacity="1" transform="translate(0,15.717391304347814)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">2,200</text></g></g></g></svg>
+
+<script id="notes">
+
+var svg = d3.select("svg");
+svg.append("text")
+.attr("id", "SectorName")
+.attr("x", 10)
+.attr("y", 28)
+.style("font-size", "18pt");
+
+var dateScale = d3.scaleTime().domain([new Date("1990-01-01"), new Date("2016-12-01")]).range([0, 350]);
+var dateAxis = d3.axisBottom(dateScale);
+var employmentScale = d3.scaleLinear().domain([0,2300]).range([350, 0]);
+var employmentAxis = d3.axisLeft(employmentScale);
+
+var sectorScale = d3.scaleOrdinal(d3.schemeCategory20);
+
+var plot = svg.append("g").attr("transform", "translate(40,30)");
+plot.append("g").call(dateAxis).attr("transform", "translate(0,350)");
+plot.append("g").call(employmentAxis).attr("transform", "translate(0,0)");
+
+var pathGenerator = d3.line()
+.x(function (d) { return dateScale(d.Date); })
+.y(function (d) { return employmentScale(d.Employment); });
+
+// Define variables outside the scope of the callback function.
+var rawData, nestedData;
+var seasonalData, unadjustedData;
+
+// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.
+function parseLine (line) {
+	line.Date = new Date(line.Date);
+	line.Employment = Number(line.Employment);
+
+	return line;
+}
+
+// Some data from http://data.worldbank.org/data-catalog/country-profiles
+
+d3.tsv("NYSEmployment.tsv", parseLine, function (error, data) {
+	rawData = data;
+
+	console.log("Code in the call-back function is only executed when the data file loads.");
+
+	nestedData = d3.nest()
+	.key(function (d) { return d.Adjusted; })
+	.key(function (d) { return d.SectorName; })
+	.entries(data);
+
+	seasonalData = nestedData[0].values;
+	unadjustedData = nestedData[1].values;
+
+	showTrends(seasonalData);
+});
+
+function showTrends(data) {
+	// Create or modify paths for each sector
+}
+
+
+console.log("Code after the d3.tsv() call is executed immediately.");
+
+</script>
+
+<!-- This block will be automatically filled with syntax-highlighted code from the script below -->
+<pre><code id="display" class="hljs http">
+
+<span class="javascript"><span class="hljs-keyword">var</span> svg = d3.select(<span class="hljs-string">"svg"</span>);
+svg.append(<span class="hljs-string">"text"</span>)
+.attr(<span class="hljs-string">"id"</span>, <span class="hljs-string">"SectorName"</span>)
+.attr(<span class="hljs-string">"x"</span>, <span class="hljs-number">10</span>)
+.attr(<span class="hljs-string">"y"</span>, <span class="hljs-number">28</span>)
+.style(<span class="hljs-string">"font-size"</span>, <span class="hljs-string">"18pt"</span>);
+
+<span class="hljs-keyword">var</span> dateScale = d3.scaleTime().domain([<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">"1990-01-01"</span>), <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">"2016-12-01"</span>)]).range([<span class="hljs-number">0</span>, <span class="hljs-number">350</span>]);
+<span class="hljs-keyword">var</span> dateAxis = d3.axisBottom(dateScale);
+<span class="hljs-keyword">var</span> employmentScale = d3.scaleLinear().domain([<span class="hljs-number">0</span>,<span class="hljs-number">2300</span>]).range([<span class="hljs-number">350</span>, <span class="hljs-number">0</span>]);
+<span class="hljs-keyword">var</span> employmentAxis = d3.axisLeft(employmentScale);
+
+<span class="hljs-keyword">var</span> sectorScale = d3.scaleOrdinal(d3.schemeCategory20);
+
+<span class="hljs-keyword">var</span> plot = svg.append(<span class="hljs-string">"g"</span>).attr(<span class="hljs-string">"transform"</span>, <span class="hljs-string">"translate(40,30)"</span>);
+plot.append(<span class="hljs-string">"g"</span>).call(dateAxis).attr(<span class="hljs-string">"transform"</span>, <span class="hljs-string">"translate(0,350)"</span>);
+plot.append(<span class="hljs-string">"g"</span>).call(employmentAxis).attr(<span class="hljs-string">"transform"</span>, <span class="hljs-string">"translate(0,0)"</span>);
+
+<span class="hljs-keyword">var</span> pathGenerator = d3.line()
+.x(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> dateScale(d.Date); })
+.y(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> employmentScale(d.Employment); });
+
+<span class="hljs-comment">// Define variables outside the scope of the callback function.</span>
+<span class="hljs-keyword">var</span> rawData, nestedData;
+<span class="hljs-keyword">var</span> seasonalData, unadjustedData;
+
+<span class="hljs-comment">// This function will be applied to all rows. Select three columns, change names, and convert strings to numbers.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseLine</span> (<span class="hljs-params">line</span>) </span>{
+	line.Date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(line.Date);
+	line.Employment = <span class="hljs-built_in">Number</span>(line.Employment);
+
+	<span class="hljs-keyword">return</span> line;
+}
+
+<span class="hljs-comment">// Some data from http://data.worldbank.org/data-catalog/country-profiles</span>
+
+d3.tsv(<span class="hljs-string">"NYSEmployment.tsv"</span>, parseLine, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error, data</span>) </span>{
+	rawData = data;
+
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code in the call-back function is only executed when the data file loads."</span>);
+
+	nestedData = d3.nest()
+	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Adjusted; })
+	.key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.SectorName; })
+	.entries(data);
+
+	seasonalData = nestedData[<span class="hljs-number">0</span>].values;
+	unadjustedData = nestedData[<span class="hljs-number">1</span>].values;
+
+	showTrends(seasonalData);
+});
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showTrends</span>(<span class="hljs-params">data</span>) </span>{
+	<span class="hljs-comment">// Create or modify paths for each sector</span>
+}
+
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Code after the d3.tsv() call is executed immediately."</span>);
+
+</span></code></pre>
+
+
+<script>
+document.getElementById("display").innerText = document.getElementById("notes").innerText;
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body></html>
