@@ -1,0 +1,161 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>INFO 3300 - Data-driven Web Applications</title>
+<link href="./perviz_files/css" rel="stylesheet">
+<link rel="stylesheet" href="./perviz_files/default.min.css">
+<script src="./perviz_files/d3.v4.min.js"></script><style></style>
+<script src="./perviz_files/topojson.v2.min.js"></script>
+<script src="./perviz_files/highlight.min.js"></script>
+<style>
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+svg { border: solid #ccc 1px; }
+path.country { fill: #ccc; stroke: #888;; }
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+<h3>Prompt for Wednesday, February 14</h3>
+
+<div>
+	<p>Visual Perception</p>
+<ul>
+	<li>Looking for data? Andy Kirk has a <a href="http://www.visualisingdata.com/2017/02/archiving-collection-places-access-data/">comprehensive list of sources</a>.</li>
+	<li>Do pie charts really deserve <a href="https://twitter.com/maartenzam/status/835036238876930050">all</a> <a href="https://flowingdata.com/2008/09/19/pie-i-have-eaten-and-pie-i-have-not-eaten/">that</a> <a href="https://flowingdata.com/2014/12/01/pie-chart-pyramid/">shade</a>? <a href="https://eagereyes.org/papers/a-pair-of-pie-chart-papers">Maybe not</a>.</li>
+	<li>Let's find out for ourselves! Here we'll replicate studies by Cleveland and McGill (Science, 1985) and Heer and Bostock (CHI, 2010). <a href="https://goo.gl/forms/S5Tu0e920TqiXVtg2">Take this survey</a>.</li>
+</ul>
+</div>
+
+<div>
+	<ul>
+		<li>Can we reverse-engineer human perception? </li>
+		<li>Data: melting and grouping. </li>
+	</ul>
+</div>
+
+<div id="plots"><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg><svg height="200" width="350"></svg></div>
+
+<script id="notes">
+
+var responses = [];
+var actualValues = {};
+
+var height = 200;
+var width = 350;
+
+var xScale = d3.scaleLinear().domain([0,100]).range([0,300]);
+var yScale = d3.scaleLinear().domain([0,100]).range([0,200]);
+
+// function to handle any row-by-row processing on TSV.
+//  "melt" the wide table into a tall narrow table.
+var parseForm = function(row) {
+	var timestamp = new Date(row["Timestamp"]);
+	Object.keys(row).forEach(function (key) {
+		if (key === "Timestamp") { return; }
+		responses.push({ Timestamp: timestamp, TypeQuestion: key, Value: Number(row[key]) });
+	});
+};
+
+var parseActual = function(row){
+	actualValues[row.Type + " " + row.Question] = Number(row.Value);
+};
+
+var binGenerator = d3.histogram();
+
+function showPlots(error, form, actual) {
+	questionData = d3.nest().key(function (d) { return d.TypeQuestion; })
+	.entries(responses);
+
+	questionData.forEach(function (question) {
+		var values = question.values.map(function (d) { return d.Value; });
+		var bins = binGenerator(values);
+		console.log(bins);
+
+		var svg = d3.select("#plots").append("svg")
+		.attr("height", height)
+		.attr("width", width);
+
+	});
+
+}
+
+d3.queue()
+.defer(d3.tsv, "Visual Decoding (Responses) - Form Responses 1.tsv", parseForm)
+.defer(d3.tsv, "actual.tsv", parseActual)
+.await(showPlots);
+
+</script>
+
+<!-- This block will be automatically filled with syntax-highlighted code from the script below -->
+<pre><code id="display" class="hljs http">
+
+<span class="javascript"><span class="hljs-keyword">var</span> responses = [];
+<span class="hljs-keyword">var</span> actualValues = {};
+
+<span class="hljs-keyword">var</span> height = <span class="hljs-number">200</span>;
+<span class="hljs-keyword">var</span> width = <span class="hljs-number">350</span>;
+
+<span class="hljs-keyword">var</span> xScale = d3.scaleLinear().domain([<span class="hljs-number">0</span>,<span class="hljs-number">100</span>]).range([<span class="hljs-number">0</span>,<span class="hljs-number">300</span>]);
+<span class="hljs-keyword">var</span> yScale = d3.scaleLinear().domain([<span class="hljs-number">0</span>,<span class="hljs-number">100</span>]).range([<span class="hljs-number">0</span>,<span class="hljs-number">200</span>]);
+
+<span class="hljs-comment">// function to handle any row-by-row processing on TSV.</span>
+<span class="hljs-comment">//  "melt" the wide table into a tall narrow table.</span>
+<span class="hljs-keyword">var</span> parseForm = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">row</span>) </span>{
+	<span class="hljs-keyword">var</span> timestamp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(row[<span class="hljs-string">"Timestamp"</span>]);
+	<span class="hljs-built_in">Object</span>.keys(row).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
+		<span class="hljs-keyword">if</span> (key === <span class="hljs-string">"Timestamp"</span>) { <span class="hljs-keyword">return</span>; }
+		responses.push({ <span class="hljs-attr">Timestamp</span>: timestamp, <span class="hljs-attr">TypeQuestion</span>: key, <span class="hljs-attr">Value</span>: <span class="hljs-built_in">Number</span>(row[key]) });
+	});
+};
+
+<span class="hljs-keyword">var</span> parseActual = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">row</span>)</span>{
+	actualValues[row.Type + <span class="hljs-string">" "</span> + row.Question] = <span class="hljs-built_in">Number</span>(row.Value);
+};
+
+<span class="hljs-keyword">var</span> binGenerator = d3.histogram();
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showPlots</span>(<span class="hljs-params">error, form, actual</span>) </span>{
+	questionData = d3.nest().key(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.TypeQuestion; })
+	.entries(responses);
+
+	questionData.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">question</span>) </span>{
+		<span class="hljs-keyword">var</span> values = question.values.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d.Value; });
+		<span class="hljs-keyword">var</span> bins = binGenerator(values);
+		<span class="hljs-built_in">console</span>.log(bins);
+
+		<span class="hljs-keyword">var</span> svg = d3.select(<span class="hljs-string">"#plots"</span>).append(<span class="hljs-string">"svg"</span>)
+		.attr(<span class="hljs-string">"height"</span>, height)
+		.attr(<span class="hljs-string">"width"</span>, width);
+
+	});
+
+}
+
+d3.queue()
+.defer(d3.tsv, <span class="hljs-string">"Visual Decoding (Responses) - Form Responses 1.tsv"</span>, parseForm)
+.defer(d3.tsv, <span class="hljs-string">"actual.tsv"</span>, parseActual)
+.await(showPlots);
+
+</span></code></pre>
+
+
+<script>
+document.getElementById("display").innerText = document.getElementById("notes").innerText;
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body></html>
