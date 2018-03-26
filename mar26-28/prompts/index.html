@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC 4931/MSCS 5931 Advanced Data Science</title>
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -12,7 +12,7 @@ input.slider { width: 300px; }
 </style>
 </head>
 <body>
-<h3>Prompt for Monday, March 20</h3>
+<h3>Prompt for Monday, March 26</h3>
 
 <div>
 <ul>
@@ -88,11 +88,11 @@ var variableStdDev = {};
 
 var randomModel = function () {
 	var model = { intercept: 0.0 };
-	
+
 	inputVariables.forEach(function (variable) {
 		model[variable] = normalGenerator() * 0.01;
 	});
-	
+
 	return model;
 }
 
@@ -143,7 +143,7 @@ d3.queue()
 	education = d3.nest().key(function (d) { return d.Country; }).map(_education);
 	gini = d3.nest().key(function (d) { return d.Country; }).map(_gini);
 	hdi = d3.nest().key(function (d) { return d.Country; }).map(_hdi);
-	
+
 	_pisa.forEach(function (country) {
 		var countryName = country.Country;
 		try {
@@ -152,18 +152,18 @@ d3.queue()
 			country["EduSpend"] = education.get(countryName)[0]["Education"];
 			country["Inequality"] = gini.get(countryName)[0]["WBGini"];
 			country["HDI"] = hdi.get(countryName)[0]["HDI"];
-			
+
 			points.push(country);
-		} catch (error) { 
+		} catch (error) {
 			console.log("problem with " + countryName);
 		}
 	});
-	
+
 	model.intercept = d3.mean(points, function (d) { return d[predictedVariable]; });
-	
+
 	var slidersDiv = d3.select("#plot").append("div")
 	.style("float", "right");
-	
+
 	slidersDiv
 	.append("div").text("Intercept")
 	.append("div")
@@ -175,11 +175,11 @@ d3.queue()
 		model.intercept = Number(this.value);
 		display();
 	});
-	
+
 	inputVariables.forEach(function (variable) {
 		variableMean[variable] = d3.mean(points, function (d) { return d[variable]; });
 		variableStdDev[variable] = d3.deviation(points, function (d) { return d[variable]; });
-		
+
 		var varMin = -30 / variableStdDev[variable];
 		var varMax = 30 / variableStdDev[variable];
 		var step = (varMax - varMin) / 100;
@@ -193,7 +193,7 @@ d3.queue()
 			display();
 		});
 	});
-	
+
 	display();
 });
 
@@ -201,7 +201,7 @@ function display() {
 	calculateErrors(points, model);
 
 	var circles = svg.selectAll("circle").data(points);
-	
+
 	circles.enter()
 	.append("circle")
 	.merge(circles)
@@ -216,7 +216,7 @@ function display() {
 	.attr("cy", function (d) { return yScale(d[predictedVariable]); });
 
 	modelText
-	.text("Loss: " + rounder(lossFunction()));	
+	.text("Loss: " + rounder(lossFunction()));
 }
 
 </script>
