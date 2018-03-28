@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC 4931/MSCS 5931: Advanced Data Science</title>
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -13,14 +13,14 @@ rect.bar { fill: #4169e1; }
 text.label {
 	fill: #888;
 	font-size: x-small;
-	dominant-baseline: middle; 
+	dominant-baseline: middle;
 	text-anchor: middle;
 }
 
 </style>
 </head>
 <body>
-<h3>Prompt for Friday, March 10</h3>
+<h3>Wednesday, March 28</h3>
 
 <div>
 <ul>
@@ -156,46 +156,46 @@ d3.select("#squaredLoss").on("click", function () {
 
 svg.on("click", function() {
 	var mouseXY = d3.mouse(this);
-	
+
 	console.log(mouseXY);
 	// Figure out where the mouse is in data coordinates
 	var clickX = xScale.invert(mouseXY[0]); // Replace these with useful values in data coordinates.
 	var clickY = yScale.invert(mouseXY[1]); //  ...
-	
+
 	// Calculate a new slope
 	model.slope = clickY / clickX;
-	
+
 	// update the errors
 	calculateErrors(points, model);
-	
+
 	modelText
 	.text("Slope: " + rounder(model.slope) + " Loss: " +
 	rounder(lossFunction()));
-	
+
 	// Move the regression line
 	regressionLine
 	.attr("y1", yScale(model.slope * -3 + model.intercept))
 	.attr("y2", yScale(model.slope * 3 + model.intercept));
-		
+
 	// Change the squares for each point
 	residuals.attr("d", errorLine)
 	squaredResiduals.attr("d", errorSquare);
 	maxResidual.data(worstError(points)).attr("d", errorLine);
-	
+
 });
-	
+
 
 
 function errorLine(point) {
 	// Return the path "d" string for a line from the
 	//  point to its predicted value
-	return "M" + xScale(point.x) + "," + yScale(point.y) + 
+	return "M" + xScale(point.x) + "," + yScale(point.y) +
 	" L" + xScale(point.x) + "," + yScale(point.y - point.error);
 }
 
 function errorSquare(point) {
 	// Return the path "d" string for a square
-	return "M" + xScale(point.x) + "," + yScale(point.y) + 
+	return "M" + xScale(point.x) + "," + yScale(point.y) +
 		" L" + xScale(point.error + point.x) + "," + yScale(point.y) +
 		" L" + xScale(point.error + point.x) + "," + yScale(point.y - point.error) +
 		" L" + xScale(point.x) + "," + yScale(point.y - point.error) +
