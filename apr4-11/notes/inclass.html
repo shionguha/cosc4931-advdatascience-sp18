@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC 4931/MSCS 5931 Advanced Data Science</title>
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -14,7 +14,7 @@ path.residual { stroke: blue; opacity: 0.3; stroke-width: 2; }
 </style>
 </head>
 <body>
-<h3>Prompt for Monday, March 13</h3>
+<h3>Prompt for April 4</h3>
 
 <div>
 <ul>
@@ -60,13 +60,13 @@ var normalGenerator = d3.randomNormal();
 
 function generateFrom(intercept, slope, noise, n) {
 	var points = [];
-	
+
 	for (var i = 0; i < n; i++) {
 		var x = normalGenerator();
 		var y = x * slope + intercept + noise * normalGenerator();
 		points.push({ x: x, y: y });
 	}
-	
+
 	return points;
 }
 
@@ -76,11 +76,11 @@ function leastSquares(points) {
 
 	if (points.length == 0) { return model; }
 
-	var meanX = d3.mean(points, function (d) { 
+	var meanX = d3.mean(points, function (d) {
 		return d.x;
 	});
 
-	var meanY = d3.mean(points, function (d) { 
+	var meanY = d3.mean(points, function (d) {
 		return d.y;
 	});
 
@@ -149,7 +149,7 @@ rounder(lossFunction()));
 function errorLine(point) {
 	// Return the path "d" string for a line from the
 	//  point to its predicted value
-	return "M" + xScale(point.x) + "," + yScale(point.y) + 
+	return "M" + xScale(point.x) + "," + yScale(point.y) +
 	" L" + xScale(point.x) + "," + yScale(point.y - point.error);
 }
 
