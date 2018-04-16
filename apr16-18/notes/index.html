@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC/MSCS 4931/5931: Advanced Data Science</title>
 <link href="https://fonts.googleapis.com/css?family=Asar" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -14,7 +14,7 @@ line.update { stroke: blue;}
 </style>
 </head>
 <body>
-<h3>Notes for Friday, April 21</h3>
+<h3>Prompt for Monday, April 16</h3>
 
 <div>
 <ul>
@@ -60,7 +60,7 @@ svg.append("line").attr("class", "axis")
 .attr("y2", yScale(0));
 
 function prediction(point) {
-	return point.x * classifier.x + 
+	return point.x * classifier.x +
 	point.y * classifier.y;
 }
 
@@ -121,7 +121,7 @@ points = svg.selectAll("circle")
 .style("stroke", predictedColor)
 .style("stroke-width", 2)
 .on("click", update);
- 
+
 // Show the current classifier vector
 classifierLine = svg.append("line")
 .attr("x1", xScale(0)).attr("y1", yScale(0))
@@ -156,11 +156,11 @@ var pointsSoFar = 0;
 // What happens when we consider a training point?
 //  Users can click individual points, this is the callback function for a point's circle element.
 function update(point) {
-	
+
 	var circle = d3.select("#p" + point.id);
-	
+
 	pointsSoFar ++;
-	
+
 	// We want to move quickly at first and then slow down when we think we are closer to a good answer.
 	var learningRate = 0.3 *
 	(1.0 / pointsSoFar);
@@ -168,25 +168,25 @@ function update(point) {
 	// Here's the perceptron rule:
 	//  If the prediction has the right sign, do nothing.
 	//  Otherwise, move the classifer to be closer to
-	//   the data point (if it's positive) or away from 
+	//   the data point (if it's positive) or away from
 	//   the data point (if it's negative)
 	if ( prediction(point) * point.label < 0.0 ) {
 		// Define a timestep for our animation.
 		var tick = 400;
-		
+
 		// Reset the update vector
 		updateVector
 		.attr("x1", xScale(0))
 		.attr("y1", yScale(0))
 		.attr("x2", xScale(0))
 		.attr("y2", yScale(0))
-		
+
 		// Show the data point as a vector
 		updateVector.transition().duration(tick)
 		.attr("x2", xScale(point.x))
 		.attr("y2", yScale(point.y));
-		
-		// Translate the vector so that we are adding it to the 
+
+		// Translate the vector so that we are adding it to the
 		//  classifier vector. It will look the same, but now it
 		//  starts at the end of the classifier.
 		updateVector.transition().delay(tick).duration(tick)
@@ -210,8 +210,8 @@ function update(point) {
 		classifier.y +=
 		learningRate * point.label * point.y;
 
-		// Make the update vector disappear as we move the classifier vector 
-		//  to its new location. Note that "classifier.x" is what used to 
+		// Make the update vector disappear as we move the classifier vector
+		//  to its new location. Note that "classifier.x" is what used to
 		//  be "classifier.x + learningRate * point.label * point.x", so the
 		//  x1 and x2 should now be the same.
 		updateVector.transition().delay(3 * tick).duration(2 * tick)
@@ -222,12 +222,12 @@ function update(point) {
 		classifierLine.transition().delay(3 * tick).duration(2 * tick)
 		.attr("x2", xScale(classifier.x))
 		.attr("y2", yScale(classifier.y));
-	
+
 		// Move the giant line that marks the decision boundary
 		classRegion.transition().delay(3 * tick).duration(2 * tick)
 		.attr("x2", xScale(100 * classifier.x))
 		.attr("y2", yScale(100 * classifier.y))
-	
+
 		// Change the circle outlines if they have crossed the decision boundary.
 		points.transition().delay(3 * tick).duration(2 * tick)
 		.style("stroke", predictedColor);
