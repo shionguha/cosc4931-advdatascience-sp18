@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>INFO 3300 - Data-driven Web Applications</title>
+<title>COSC 4931/MSCS 5931: Advanced Data Science</title>
 <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -13,7 +13,7 @@ div#text { float: right; width: 40%; background-color: #dddddd; padding: 20px; b
 </style>
 </head>
 <body>
-<h3>Prompt for Friday, April 28. Mulit-dimensional Scaling.</h3>
+<h3>Prompt for Wednesday, April 25. Mulit-dimensional Scaling.</h3>
 
 <div>
 <ul>
@@ -94,11 +94,11 @@ function innerProduct(x, y) {
 // Multiply a matrix times a vector -> a vector
 function multiply(matrix, vector) {
 	var product = new Array(vector.length);
-	
+
 	for (var row = 0; row < matrix.length; row++) {
 		product[row] = innerProduct(matrix[row], vector);
 	}
-	
+
 	return product;
 }
 
@@ -109,7 +109,7 @@ function normalize(vector) {
 		squaredSum += vector[i] * vector[i];
 	}
 	var normalizer = 1.0 / Math.sqrt(squaredSum);
-	
+
 	var newVector = new Float64Array(vector.length);
 	for (var i = 0; i < vector.length; i++) {
 		newVector[i] = vector[i] * normalizer;
@@ -149,17 +149,17 @@ function squaredDistance(x, y) {
 
 // The simplest Eigenvector algorithm: Normalize, multiply, orthogonalize, repeat.
 function powerIteration () {
-	var newMatrix = [ normalize(embeddingMatrix[0]), normalize(embeddingMatrix[1])];		
-	
+	var newMatrix = [ normalize(embeddingMatrix[0]), normalize(embeddingMatrix[1])];
+
 	newMatrix[0] = multiply(matrix, newMatrix[0]);
 	newMatrix[1] = multiply(matrix, newMatrix[1]);
-	
+
 	orthogonalize(newMatrix[0], newMatrix[1]);
 
 	var change = diff(embeddingMatrix, newMatrix);
-	
-	embeddingMatrix = newMatrix;	
-		
+
+	embeddingMatrix = newMatrix;
+
 	return change;
 }
 
@@ -168,7 +168,7 @@ function powerIteration () {
 */
 function distanceMatrix(matrix) {
 	var numPoints = matrix.length;
-	
+
 	var distanceMatrix = new Array(numPoints);
 	for (var i = 0; i < numPoints; i++) {
 	    distanceMatrix[i] = new Float64Array(numPoints);
@@ -207,7 +207,7 @@ function distanceMatrix(matrix) {
 			distanceMatrix[row][col] *= -0.5;
 		}
 	}
-	
+
 	return distanceMatrix;
 }
 
@@ -269,9 +269,9 @@ function l1Normalize (x) {
 	for (var i = 0; i < x.length; i++) {
 		sum += Math.abs(x[i]);
 	}
-	
+
 	if (sum == 0.0) { return x; }
-	
+
 	var normalizer = 1.0 / sum;
 	for (var i = 0; i < x.length; i++) {
 		x[i] *= normalizer;
@@ -282,9 +282,9 @@ function l1Normalize (x) {
 function centerColumns(rows) {
 	var nRows = rows.length;
 	var nCols = rows[0].length;
-	
+
 	var rowMeans = new Float64Array(nCols);
-	
+
 	// Collect column sums
 	for (var row = 0; row < nRows; row++) {
 		var x = rows[row];
@@ -292,12 +292,12 @@ function centerColumns(rows) {
 			rowMeans[col] += x[col];
 		}
 	}
-	
+
 	// Sum -> mean
 	for (var col = 0; col < nCols; col++) {
 		rowMeans[col] /= nRows;
 	}
-	
+
 	// Recenter
 	for (var row = 0; row < nRows; row++) {
 		var x = rows[row];
@@ -310,9 +310,9 @@ function centerColumns(rows) {
 function normalizeColumns(rows) {
 	var nRows = rows.length;
 	var nCols = rows[0].length;
-	
+
 	var rowNorms = new Float64Array(nCols);
-	
+
 	// Collect column squared sums
 	for (var row = 0; row < nRows; row++) {
 		var x = rows[row];
@@ -320,13 +320,13 @@ function normalizeColumns(rows) {
 			rowNorms[col] += x[col] * x[col];
 		}
 	}
-	
+
 	// Sum of squares -> sample standard deviation
 	for (var col = 0; col < nCols; col++) {
 		rowNorms[col] = 1.0 / Math.sqrt(rowNorms[col] / (nRows - 1));
 	}
-	
-	// 
+
+	//
 	for (var row = 0; row < nRows; row++) {
 		var x = rows[row];
 		for (var col = 0; col < nCols; col++) {
@@ -348,10 +348,10 @@ function parseLine (row) {
 	else {
 		row.Stars = 1;
 	}
-	
+
 	row.tokens = row.Text.replace(/[\.,\[\]\(\)\:]/g, " ").split(" ").filter(function (w) { return w.length > 0; }).map(regularize);
 	addToVocab(row.tokens);
-	
+
 	documents.push(row);
 }
 
@@ -359,20 +359,20 @@ var timer;
 
 d3.tsv("yelp.tsv", parseLine, function (error, data) {
 	if (error) { console.log(error); }
-	
+
 	var selectedVocab = mostFrequent(500, noFilter);
 	countMatrix = documents.map(function (d) { return toCountArray(d.tokens, selectedVocab)});
 	centerColumns(countMatrix);
 	normalizeColumns(countMatrix);
-	
+
 	matrix = distanceMatrix(countMatrix);
 	var numPoints = matrix.length;
-	
+
 	// Initialize randomly
 	embeddingMatrix = [ normalVector(numPoints), normalVector(numPoints) ];
-	
+
 	texts = svg.selectAll("text.point").data(documents);
-	
+
 	texts = texts.enter().append("text").attr("class", "point")
 	.text(function (d) { return d.Stars; })
 	.style("fill", function (d) { return d.Stars === 5 ? "#f1a340" : "#998ec3"; })
@@ -381,7 +381,7 @@ d3.tsv("yelp.tsv", parseLine, function (error, data) {
 		.text(d.Text + " (" + d.Tags.join(", ") + ") !!  ");
 	})
 	.merge(texts);
-	
+
 	iterate();
 	//timer = d3.timer(iterate);
 });
@@ -389,15 +389,15 @@ d3.tsv("yelp.tsv", parseLine, function (error, data) {
 function iterate() {
 	var change = powerIteration();
 	console.log(change);
-	
+
 	xScale = d3.scaleLinear()
 	.domain(d3.extent(embeddingMatrix[0]))
 	.range([padding, width - padding]);
-	
+
 	yScale = d3.scaleLinear()
 	.domain(d3.extent(embeddingMatrix[1]))
 	.range([height - padding, padding]);
-	
+
 	texts
 	.attr("x", function (d, i) {
 		return xScale(embeddingMatrix[0][i]);
@@ -405,7 +405,7 @@ function iterate() {
 	.attr("y", function (d, i) {
 		return yScale(embeddingMatrix[1][i]);
 	});
-	
+
 	if (change < 0.1) { timer.stop(); }
 }
 
